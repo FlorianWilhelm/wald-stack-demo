@@ -1,0 +1,27 @@
+[project]
+requires-python = "~=3.10"
+name = "dbt-snowflake-showcase"
+description = "Showcasing Snowflake in conjecture with dbt and Python" 
+readme = "README.md"
+license = { text = "MIT" }
+keywords = [
+  "dbt",
+  "snowflake",
+  "python",
+  "snowpark",
+]
+authors = [
+  { name = "Florian Wilhelm", email = "Florian.Wilhelm@gmail.com" },
+]
+
+[envs.default]
+dependencies = [
+  "dbt-core",
+  "dbt-snowflake",
+  "jupyterlab",
+  "pandas",
+]
+[envs.default.scripts]
+cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=src/hatch_showcase --cov=tests"
+no-cov = "cov --no-cov"
+
