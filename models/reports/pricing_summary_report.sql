@@ -2,8 +2,6 @@
 
 Copyright: Snowflake
  */
-use schema mydb.tpch_sf100;
--- or tpch_sf100, tpch_sf1000
 
 SELECT l_returnflag,
        l_linestatus,
@@ -17,9 +15,9 @@ SELECT l_returnflag,
        avg(l_extendedprice) as avg_price,
        avg(l_discount)      as avg_disc,
        count(*)             as count_order
-FROM lineitem
+FROM sampledb.tpch_sf100.lineitem
 WHERE l_shipdate <= dateadd(day, -90, to_date('1998-12-01'))
 GROUP BY l_returnflag,
          l_linestatus
 ORDER BY l_returnflag,
-         l_linestatus;
+         l_linestatus
