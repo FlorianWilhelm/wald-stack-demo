@@ -15,7 +15,7 @@ SELECT l_returnflag,
        avg(l_extendedprice) as avg_price,
        avg(l_discount)      as avg_disc,
        count(*)             as count_order
-FROM sampledb.tpch_sf100.lineitem
+FROM {{ source('tpch_sf1', 'lineitem') }}
 WHERE l_shipdate <= dateadd(day, -90, to_date('1998-12-01'))
 GROUP BY l_returnflag,
          l_linestatus

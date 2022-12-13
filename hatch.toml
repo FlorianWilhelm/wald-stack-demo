@@ -1,5 +1,7 @@
+# Hatch is only used for managing the default environment
+
 [project]
-requires-python = "~=3.10"
+requires-python = "~=3.8"
 name = "dbt-snowflake-showcase"
 description = "Showcasing Snowflake in conjecture with dbt and Python" 
 readme = "README.md"
@@ -15,13 +17,14 @@ authors = [
 ]
 
 [envs.default]
+python = "3.8"
 dependencies = [
   "dbt-core",
   "dbt-snowflake",
   "jupyterlab",
-  "pandas",
+  "snowflake-snowpark-python[pandas]",
+  "snowflake-connector-python[pandas]",
 ]
 [envs.default.scripts]
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=src/hatch_showcase --cov=tests"
 no-cov = "cov --no-cov"
-
