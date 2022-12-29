@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: pricing_summary_report
+    config:
+      tags: ['summary']
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: L_RETURNFLAG
+      - name: L_LINESTATUS
+      - name: SUM_QTY
+      - name: SUM_BASE_PRICE
+      - name: SUM_DISC_PRICE
+      - name: SUM_CHARGE
+      - name: AVG_QTY
+      - name: AVG_PRICE
+      - name: AVG_DISC
+      - name: COUNT_ORDER

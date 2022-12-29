@@ -8,7 +8,7 @@ def model(dbt, session):
         enabled=False
     )
 
-    date_cols = ["L_SHIPDATE", "L_COMMITDATE", "L_RECEIPTATE"]
+    date_cols = ["L_SHIPDATE", "L_COMMITDATE", "L_RECEIPTDATE"]
 
     df_price = dbt.ref("stg_fruit_prices_fact").to_pandas()
 
