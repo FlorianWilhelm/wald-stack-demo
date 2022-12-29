@@ -13,9 +13,9 @@ Python environment and dependencies we make use of [Mambaforge], which is a fast
 1. Set up the data Warehouse [Snowflake], i.e.:
    1. [register a 30-day free trial Snowflake account] and remember your *account-identifier*,
    2. [log into Snowflake's Snowsight UI] using your *account-identifier*,
-   3. get [Snowflake's TPC-H sample database] with <kbd>Data</kbd> » <kbd>Private Sharing</kbd> » <kbd>SAMPLE_DATA</kbd> and name it `SAMPLEDB`.
-      <img src="https://raw.githubusercontent.com/FlorianWilhelm/dbt_snowflake_showcase/master/assets/images/share_sample_data.png" alt="Share SAMPLE_DATA" width="500" role="img"><br>
-      <img src="https://raw.githubusercontent.com/FlorianWilhelm/dbt_snowflake_showcase/master/assets/images/db_of_sample_data.png" alt="Create DB SAMPLEDB" width="500" role="img">
+   3. get [Snowflake's TPC-H sample database] with <kbd>Data</kbd> » <kbd>Private Sharing</kbd> » <kbd>SAMPLE_DATA</kbd> and name it `SAMPLEDB`.<br>
+      <img src="https://raw.githubusercontent.com/FlorianWilhelm/dbt_snowflake_showcase/master/assets/images/share_sample_data.png" alt="Share SAMPLE_DATA" width="400" role="img">
+      <img src="https://raw.githubusercontent.com/FlorianWilhelm/dbt_snowflake_showcase/master/assets/images/db_of_sample_data.png" alt="Create DB SAMPLEDB" width="250" role="img">
    4. [activate Snowpark and third-party packages] with <kbd>Worksheets</kbd> » <kbd>+ Worksheet</kbd> and execute:
       ```SQL
       use role accountadmin;
