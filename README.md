@@ -1,20 +1,20 @@
 # WALD: The Modern & Sustainable Analytics Stack
 
-The name **WALD**-stack stems from the four technologies it is composed of, i.e. a cloud-computing **W**arehouse 
-like [Snowflake] or [Google BigQuery], the open-source data integration engine [**A**irbyte], the open-source full-stack 
+The name **WALD**-stack stems from the four technologies it is composed of, i.e. a cloud-computing **W**arehouse
+like [Snowflake] or [Google BigQuery], the open-source data integration engine [**A**irbyte], the open-source full-stack
 BI platform [**L**igthdash], and the open-source data transformation tool [**D**BT].
 
-This demonstration projects showcases the Wald-stack in a minimal example. It makes use of the [TPC-H dataset] by the 
-[Transaction Processing Performance Council (TPC)] and the data warehouse [Snowflake]. To allow the definition of 
+This demonstration projects showcases the Wald-stack in a minimal example. It makes use of the [TPC-H dataset] by the
+[Transaction Processing Performance Council (TPC)] and the data warehouse [Snowflake]. To allow the definition of
 [Python]-based models within [dbt Core] also Snowflake's [Snowpark]-feature is enabled. For analytics and BI
 we use the graphical BI-tool [Lightdash], which is a suistable addition from the dbt-ecosystem.
 
 The WALD-stack is sustainable since it consists mainly of open-source technologies, however all technologies also offer
 managed cloud services. The data warehouse itself, i.e. [Snowflake] or [Google BigQuery], is the only non-open-source
-technology in the WALD-stack. In case of Snowflake, only the clients, eg. [snowflake-connector-python] and 
+technology in the WALD-stack. In case of Snowflake, only the clients, eg. [snowflake-connector-python] and
 [snowflake-snowpark-python], are available as open-source software.
 
-To manage the Python environment and dependencies in this demonstration, we make use of [Mambaforge], which is a faster 
+To manage the Python environment and dependencies in this demonstration, we make use of [Mambaforge], which is a faster
 and open-source alternative to [Anaconda].
 
 
@@ -32,7 +32,7 @@ and open-source alternative to [Anaconda].
 
       grant role orgadmin to user YOUR_USERNAME;
       ```
-      Even on a trial account you should now be able to switch to role ORGADMIN by clicking on your login name followed by 
+      Even on a trial account you should now be able to switch to role ORGADMIN by clicking on your login name followed by
       <kbd>Switch Role</kbd> » <kbd>ORGADMIN</kbd>. Then click <kbd>Admin</kbd> » <kbd>Billing</kbd> » <kbd>Terms & Billing</kbd>,
       scroll to the Anaconda section and click the Enable button. The Anaconda Packages (Preview Feature) dialog opens and
       you need to agree to the terms by clicking the Acknowledge & Continue button.
@@ -41,7 +41,7 @@ and open-source alternative to [Anaconda].
    1. clone this repository with `https://github.com/FlorianWilhelm/wald-stack-demo.git`,
    2. change into the repository with `cd wald-stack-demo`,
    3. make sure you have [Mambaforge] installed,
-   4. set up the mamba environment `wald-stack` with: 
+   4. set up the mamba environment `wald-stack` with:
       ```
       mamba create --name wald-stack -c https://repo.anaconda.com/pkgs/snowflake \
       python=3.8 numpy pandas jupyterlab dbt-core dbt-snowflake snowflake-snowpark-python snowflake-connector-python
@@ -80,7 +80,7 @@ and open-source alternative to [Anaconda].
 
 ## What's to see here?
 
-In the `notebooks` directory, you'll find two notebooks that demonstrate how [dbt] as well as the 
+In the `notebooks` directory, you'll find two notebooks that demonstrate how [dbt] as well as the
 [snowflake-connector-python] can also be directly used to execute queries for instance for debugging. In both cases
 the subsystems of [dbt], and thus also the retrieval of the credentials, are used so that no credentials need to be
 passed.
@@ -118,13 +118,13 @@ of the data we are using for this demonstration.
 Following resources were used for this demonstration project besides the ones already mentioned:
 
 * [A Beginner’s Guide to DBT (data build tool)] by Jessica Le
-* [Sample queries from tpch-dbgen] by Dragan Sahpaski 
+* [Sample queries from tpch-dbgen] by Dragan Sahpaski
 * [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python] by Ripu Jain and Anders Swanson
 * [dbt cheetsheet] by Bruno S. de Lima
 
 ## ToDos
 
-* Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating 
+* Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
   the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
 * Fix the Snowflake screenshots.
 * Add Airbyte and maybe later Dagster
