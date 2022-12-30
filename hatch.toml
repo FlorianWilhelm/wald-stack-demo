@@ -1,9 +1,11 @@
 # Hatch is only used for managing the default environment
+# This file is only needed if you want to use Hatch instead of mamba to manage your environment
+# Also consider installing pyenv to install Python 3.8 which is needed by Snowflake
 
 [project]
 requires-python = "~=3.8"
-name = "dbt-snowflake-showcase"
-description = "Showcasing Snowflake in conjecture with dbt and Python" 
+name = "wald-stack-demo"
+description = "Demonstrating the WALD-stack on Snowflake"
 readme = "README.md"
 license = { text = "MIT" }
 keywords = [

@@ -1,11 +1,21 @@
-# Demonstration Project for Snowpark on Snowflake, dbt & Lightdash  
+# WALD: The Modern & Sustainable Analytics Stack
 
-This demonstration projects make use of the [TPC-H dataset] by the [Transaction Processing Performance Council (TPC)]
-to showcase the combination of [dbt] with the data warehouse [Snowflake], its Python support [Snowpark] and the 
-full-stack [BI platform Ligthdash], which is an alternative to [Tableau]. Wherever possible, we use the open-source versions, 
-i.e. a local installation of [dbt Core] and [Lightdash]. For [Snowflake] and [Snowpark] only the clients, i.e.   
-[snowflake-connector-python] and [snowflake-snowpark-python] are available as open-source software. To manage the
-Python environment and dependencies we make use of [Mambaforge], which is a faster and open-source alternative to [Anaconda].
+The name **WALD**-stack stems from the four technologies it is composed of, i.e. a cloud-computing **W**arehouse 
+like [Snowflake] or [Google BigQuery], the open-source data integration engine [**A**irbyte], the open-source full-stack 
+BI platform [**L**igthdash], and the open-source data transformation tool [**D**BT].
+
+This demonstration projects showcases the Wald-stack in a minimal example. It makes use of the [TPC-H dataset] by the 
+[Transaction Processing Performance Council (TPC)] and the data warehouse [Snowflake]. To allow the definition of 
+[Python]-based models within [dbt Core] also Snowflake's [Snowpark]-feature is enabled. For analytics and BI
+we use the graphical BI-tool [Lightdash], which is a suistable addition from the dbt-ecosystem.
+
+The WALD-stack is sustainable since it consists mainly of open-source technologies, however all technologies also offer
+managed cloud services. The data warehouse itself, i.e. [Snowflake] or [Google BigQuery], is the only non-open-source
+technology in the WALD-stack. In case of Snowflake, only the clients, eg. [snowflake-connector-python] and 
+[snowflake-snowpark-python], are available as open-source software.
+
+To manage the Python environment and dependencies in this demonstration, we make use of [Mambaforge], which is a faster 
+and open-source alternative to [Anaconda].
 
 
 ## Getting started
@@ -20,24 +30,24 @@ Python environment and dependencies we make use of [Mambaforge], which is a fast
       ```SQL
       use role accountadmin;
 
-      grant role orgadmin to user USERNAME;
+      grant role orgadmin to user YOUR_USERNAME;
       ```
-      Even on a trial account you should then be able to switch to role ORGADMIN by clicking on your login name followed by 
+      Even on a trial account you should now be able to switch to role ORGADMIN by clicking on your login name followed by 
       <kbd>Switch Role</kbd> » <kbd>ORGADMIN</kbd>. Then click <kbd>Admin</kbd> » <kbd>Billing</kbd> » <kbd>Terms & Billing</kbd>,
       scroll to the Anaconda section and click the Enable button. The Anaconda Packages (Preview Feature) dialog opens and
       you need to agree to the terms by clicking the Acknowledge & Continue button.
 
 2. Set up your local machine for dbt and Snowpark, i.e.:
-   1. clone this repository with `https://github.com/FlorianWilhelm/dbt_snowflake_showcase.git`,
-   2. change into the repository with `cd dbt_snowflake_showcase`,
+   1. clone this repository with `https://github.com/FlorianWilhelm/wald-stack-demo.git`,
+   2. change into the repository with `cd wald-stack-demo`,
    3. make sure you have [Mambaforge] installed,
-   4. set up the mamba environment `dbt_snowflake_showcase` with: 
+   4. set up the mamba environment `wald-stack` with: 
       ```
-      mamba create --name dbt_snowflake_showcase --override-channels -c https://repo.anaconda.com/pkgs/snowflake \
+      mamba create --name wald-stack -c https://repo.anaconda.com/pkgs/snowflake \
       python=3.8 numpy pandas jupyterlab dbt-core dbt-snowflake snowflake-snowpark-python snowflake-connector-python
       ```
-   5. activate the environment with `mamba activate dbt_snowflake_showcase`,
-   6. create a directory `~/.dbt/` and add a file `profiles.yml` with content:
+   5. activate the environment with `mamba activate wald-stack`,
+   6. create a directory `~/.dbt/` and create a file `profiles.yml` with content:
       ```yaml
       default:
         outputs:
@@ -49,7 +59,7 @@ Python environment and dependencies we make use of [Mambaforge], which is a fast
             schema: MySchema
             threads: 1
             type: snowflake
-            user: your_user_name
+            user: your_username
             warehouse: TPCDS_BENCH_10T
         target: dev
       ```
@@ -60,7 +70,7 @@ Python environment and dependencies we make use of [Mambaforge], which is a fast
    1. make sure you have [docker] installed,
    2. install Lightdash locally by following the [local deployment instructions], i.e.:
       ```commandline
-      cd .. # leave "dbt_snowflake_showcase" if necessary
+      cd .. # to leave "wald-stack-demo" if necessary
       git clone https://github.com/lightdash/lightdash
       cd lightdash
       ./scripts/install.sh # and choose "Custom install"
@@ -68,13 +78,31 @@ Python environment and dependencies we make use of [Mambaforge], which is a fast
    3. check if the front-end comes up at [http://localhost:8080](http://localhost:8080).
 
 
+## What's to see here?
+
+In the `notebooks` directory, you'll find two notebooks that demonstrate how [dbt] as well as the 
+[snowflake-connector-python] can also be directly used to execute queries for instance for debugging. In both cases
+the subsystems of [dbt], and thus also the retrieval of the credentials, are used so that no credentials need to be
+passed.
+
 ## Typical commands
+
+### dbt
+
+* **run all models**: `dbt run`
+* **run all tests**: `dbt test`
+* **executes snapshots**: `dbt snapshot`
+* **load seed csv-files**: `dbt seed`
+* **run + test + snapshot + seed in DAG order**: `dbt build`
+* **download dependencies**: `dbt dep`
+* **generate docs and lineage**: `dbt docs`
 
 ### Lightdash
 
 * **restart**: `docker-compose -f docker-compose.yml start`
 * **stop**: `docker-compose -f docker-compose.yml stop -v`
 * **bring down and clean volumes**: `docker-compose -f docker-compose.yml down -v`
+
 
 ## TPC-H Sample Data
 
@@ -91,18 +119,25 @@ Following resources were used for this demonstration project besides the ones al
 
 * [A Beginner’s Guide to DBT (data build tool)] by Jessica Le
 * [Sample queries from tpch-dbgen] by Dragan Sahpaski 
-* [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python]
+* [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python] by Ripu Jain and Anders Swanson
+* [dbt cheetsheet] by Bruno S. de Lima
 
 ## ToDos
 
 * Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating 
   the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
+* Fix the Snowflake screenshots.
+* Add Airbyte and maybe later Dagster
 
+[**A**irbyte]:https://airbyte.com/
+[Google BigQuery]: https://cloud.google.com/bigquery
 [TPC-H dataset]: https://www.tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.1.pdf
 [Transaction Processing Performance Council (TPC)]: https://www.tpc.org/
 [Snowflake]: https://www.snowflake.com/
 [Snowpark]: https://www.snowflake.com/snowpark/
-[BI platform Ligthdash]: https://www.lightdash.com/
+[**L**igthdash]: https://www.lightdash.com/
+[dbt]: https://www.getdbt.com/
+[**D**BT]: https://www.getdbt.com/
 [dbt Core]: https://github.com/dbt-labs/dbt-core
 [Tableau]: https://www.tableau.com/
 [Lightdash]: https://github.com/lightdash/lightdash
@@ -119,3 +154,6 @@ Following resources were used for this demonstration project besides the ones al
 [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python]: https://www.snowflake.com/blog/modern-analytics-stack-snowpark-dbt-python/
 [docker]: https://www.docker.com/
 [local deployment instructions]: https://docs.lightdash.com/get-started/setup-lightdash/install-lightdash/#deploy-locally-with-our-installation-script
+[dbt cheetsheet]: https://github.com/bruno-szdl/cheatsheets/blob/main/dbt_cheat_sheet.pdf
+[Anaconda]: https://www.anaconda.com/products/distribution
+[Python]: https://www.python.org/
