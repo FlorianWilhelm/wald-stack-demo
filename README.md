@@ -9,8 +9,8 @@ This demonstration projects showcases the Wald-stack in a minimal example. It ma
 [Python]-based models within [dbt Core] also Snowflake's [Snowpark]-feature is enabled. For analytics and BI
 we use the graphical BI-tool [Lightdash], which is a suistable addition from the dbt-ecosystem.
 
-The WALD-stack is sustainable since it consists mainly of open-source technologies, however all technologies also offer
-managed cloud services. The data warehouse itself, i.e. [Snowflake] or [Google BigQuery], is the only non-open-source
+The WALD-stack is sustainable since it consists mainly of open-source technologies, however all technologies are also
+offered as managed cloud services. The data warehouse itself, i.e. [Snowflake] or [Google BigQuery], is the only non-open-source
 technology in the WALD-stack. In case of Snowflake, only the clients, eg. [snowflake-connector-python] and
 [snowflake-snowpark-python], are available as open-source software.
 
@@ -20,25 +20,27 @@ and open-source alternative to [Anaconda].
 
 ## Getting started
 
-1. Set up the data Warehouse [Snowflake], i.e.:
-   1. [register a 30-day free trial Snowflake account] and remember your *account-identifier*,
-   2. [log into Snowflake's Snowsight UI] using your *account-identifier*,
-   3. get [Snowflake's TPC-H sample database] with <kbd>Data</kbd> » <kbd>Private Sharing</kbd> » <kbd>SAMPLE_DATA</kbd> and name it `SAMPLEDB`.<br>
-      <img src="https://raw.githubusercontent.com/FlorianWilhelm/dbt_snowflake_showcase/master/assets/images/share_sample_data.png" alt="Share SAMPLE_DATA" width="400" role="img">
-      <img src="https://raw.githubusercontent.com/FlorianWilhelm/dbt_snowflake_showcase/master/assets/images/db_of_sample_data.png" alt="Create DB SAMPLEDB" width="250" role="img">
-   4. [activate Snowpark and third-party packages] with <kbd>Worksheets</kbd> » <kbd>+ Worksheet</kbd> and execute:
+1. Setting up the data **W**arehouse [Snowflake], i.e.:
+   1. [register a 30-day free trial Snowflake account] by choosing the standard edition, AWS as cloud provider and any
+      region you want,
+   2. check the Snowflake e-mail for your *account-identifier*, which is specified by the URL you are given, e.g.
+      like `https://<account_name>.snowflakecomputing.com`,
+   3. [log into Snowflake's Snowsight UI] using your *account-identifier*,
+   4. check if [Snowflake's TPC-H sample database] `SNOWFLAKE_SAMPLE_DATA` is available under <kbd>Data</kbd> » kbd>Databases</kbd>
+      or create it under <kbd>Data</kbd> » <kbd>Private Sharing</kbd> » <kbd>SAMPLE_DATA</kbd> and name it `SNOWFLAKE_SAMPLE_DATA`.<br>
+   5. [activate Snowpark and third-party packages] by clicking on your login name followed by <kbd>Switch Role</kbd> » <kbd>ORGADMIN</kbd>.
+      Only if <kbd>ORGADMIN</kbd> doesn't show in the drop-down menu, go to <kbd>Worksheets</kbd> » <kbd>+ Worksheet</kbd> and execute:
       ```SQL
       use role accountadmin;
 
       grant role orgadmin to user YOUR_USERNAME;
       ```
-      Even on a trial account you should now be able to switch to role ORGADMIN by clicking on your login name followed by
-      <kbd>Switch Role</kbd> » <kbd>ORGADMIN</kbd>. Then click <kbd>Admin</kbd> » <kbd>Billing</kbd> » <kbd>Terms & Billing</kbd>,
-      scroll to the Anaconda section and click the Enable button. The Anaconda Packages (Preview Feature) dialog opens and
-      you need to agree to the terms by clicking the Acknowledge & Continue button.
+      This should add `ORGADMIN` to the list. Now click <kbd>Admin</kbd> » <kbd>Billing</kbd> » <kbd>Terms & Billing</kbd>,
+      and click <kbd>Enable</kbd> next to `Anaconda Python packages`. The Anaconda Packages (Preview Feature) dialog opens,
+      and you need to agree to the terms by clicking <kbd>Acknowledge & Continue</kbd>.
 
-2. Set up your local machine for dbt and Snowpark, i.e.:
-   1. clone this repository with `https://github.com/FlorianWilhelm/wald-stack-demo.git`,
+2. Setting up [**D**BT] and [Snowpark] locally, i.e.:
+   1. clone this repository with `git clone https://github.com/FlorianWilhelm/wald-stack-demo.git`,
    2. change into the repository with `cd wald-stack-demo`,
    3. make sure you have [Mambaforge] installed,
    4. set up the mamba environment `wald-stack` with:
@@ -47,7 +49,7 @@ and open-source alternative to [Anaconda].
       python=3.8 numpy pandas jupyterlab dbt-core dbt-snowflake snowflake-snowpark-python snowflake-connector-python
       ```
    5. activate the environment with `mamba activate wald-stack`,
-   6. create a directory `~/.dbt/` and create a file `profiles.yml` with content:
+   6. create a directory `~/.dbt/` and a file `profiles.yml` in it, with content:
       ```yaml
       default:
         outputs:
@@ -66,19 +68,49 @@ and open-source alternative to [Anaconda].
       and set `account`, `password` as well as `user` accordingly,
    7. test that your connection works by running `dbt debug`. You should see "All checks passed!"-message.
 
-3. Set up [Lightdash] locally, i.e.:
+3. Setting up [**A**irbyte] locally, i.e.:
+   1. make sure you have [docker] installed,
+   2. install it with:
+      ```commandline
+      git clone https://github.com/airbytehq/airbyte.git
+      cd airbyte
+      docker-compose up
+      ```
+   3. check if the front-end comes up at [http://localhost:8000](http://localhost:8000) and log in with
+      username `airbyte` and password `password`,
+   4. enter some e-mail address and click continue. The main dashboard should show up.
+
+4. Set up [**L**ightdash] locally, i.e.:
    1. make sure you have [docker] installed,
    2. install Lightdash locally by following the [local deployment instructions], i.e.:
       ```commandline
       cd .. # to leave "wald-stack-demo" if necessary
       git clone https://github.com/lightdash/lightdash
       cd lightdash
-      ./scripts/install.sh # and choose "Custom install"
+      ./scripts/install.sh # and choose "Custom install", enter the path to your dbt project from above
       ```
    3. check if the front-end comes up at [http://localhost:8080](http://localhost:8080).
 
+## Demonstration of the WALD-stack
 
-## What's to see here?
+### **W**arehouse (Snowflake)
+
+### **A**irbyte
+
+To get our hands on some data we can ingest into our warehouse, let's just download some [weather data from opendatasoft]
+and put it into our `seeds` folder. In order to do so, just run inside the `wald-stack-demo` folder:
+```commandline
+curl -O https://public.opendatasoft.com/explore/dataset/noaa-daily-weather-data/download/\?format\=csv\&timezone\=Europe/Berlin\&lang\=en\&use_labels_for_header\=true\&csv_separator\=%3B -o seeds/noaa-daily-weather-data.csv
+```
+While you wait, go and grab yourself a cup of :coffee: or :tea:.
+
+### **L**ightdash
+
+### **D**BT
+
+
+
+## What else is to see here?
 
 In the `notebooks` directory, you'll find two notebooks that demonstrate how [dbt] as well as the
 [snowflake-connector-python] can also be directly used to execute queries for instance for debugging. In both cases
@@ -110,7 +142,7 @@ The following figure from the [TPC-H Benchmark documentation] shows database ent
 of the data we are using for this demonstration.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/dbt_snowflake_showcase/master/assets/images/tpch.png" alt="TPC-H table metadata" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/tpch.png" alt="TPC-H table metadata" width="500" role="img">
 </div>
 
 ## Resources
@@ -157,3 +189,4 @@ Following resources were used for this demonstration project besides the ones al
 [dbt cheetsheet]: https://github.com/bruno-szdl/cheatsheets/blob/main/dbt_cheat_sheet.pdf
 [Anaconda]: https://www.anaconda.com/products/distribution
 [Python]: https://www.python.org/
+[weather data from opendatasoft]: https://public.opendatasoft.com/explore/dataset/noaa-daily-weather-data/
