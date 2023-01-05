@@ -21,7 +21,7 @@ and open-source alternative to [Anaconda].
 ## Getting started
 
 1. Setting up the data **W**arehouse [Snowflake], i.e.:
-   1. [register a 30-day free trial Snowflake account] by choosing the standard edition, AWS as cloud provider and any
+   1. [register a 30-day free trial Snowflake account] and choose the standard edition, AWS as cloud provider and any
       region you want,
    2. check the Snowflake e-mail for your *account-identifier*, which is specified by the URL you are given, e.g.
       like `https://<account_name>.snowflakecomputing.com`,
@@ -38,6 +38,11 @@ and open-source alternative to [Anaconda].
       This should add `ORGADMIN` to the list. Now click <kbd>Admin</kbd> » <kbd>Billing</kbd> » <kbd>Terms & Billing</kbd>,
       and click <kbd>Enable</kbd> next to `Anaconda Python packages`. The Anaconda Packages (Preview Feature) dialog opens,
       and you need to agree to the terms by clicking <kbd>Acknowledge & Continue</kbd>.
+   6. choose a warehouse (which is a compute-cluster in Snowflake-speak) by clicking on <kbd>Worksheets</kbd> and selecting
+      <kbd>Tutorial 1: Sample queries on TPC-H data</kbd>. Now click on the role button showing <kbd>ACCOUNTADMIN · No Warehouse</kbd>
+      on the upper right and select the warehouse <kbd>COMPUTE_WH</kbd> or create a new one. Note the name of the warehouse
+      for the dbt setup later,
+   7. execute *all* statements from the tutorial worksheet to see if everything was set up correctly.
 
 2. Setting up [**D**BT] and [Snowpark] locally, i.e.:
    1. clone this repository with `git clone https://github.com/FlorianWilhelm/wald-stack-demo.git`,
@@ -55,17 +60,18 @@ and open-source alternative to [Anaconda].
         outputs:
           dev:
             account: your_account-identifier
-            database: MYDB
+            database: MY_DB
             password: your_password
             role: accountadmin
-            schema: MySchema
+            schema: WALD_STACK_DEMO
             threads: 1
             type: snowflake
             user: your_username
-            warehouse: TPCDS_BENCH_10T
+            warehouse: COMPUTE_WH
         target: dev
       ```
-      and set `account`, `password` as well as `user` accordingly,
+      and set `account`, `password` as well as `user` accordingly. Also check that the value of `warehouse` corresponds
+      to the one you have in Snowflake,
    7. test that your connection works by running `dbt debug`. You should see "All checks passed!"-message.
 
 3. Setting up [**A**irbyte] locally, i.e.:
@@ -100,7 +106,9 @@ and open-source alternative to [Anaconda].
 To get our hands on some data we can ingest into our warehouse, let's just download some [weather data from opendatasoft]
 and put it into our `seeds` folder. In order to do so, just run inside the `wald-stack-demo` folder:
 ```commandline
-curl -O https://public.opendatasoft.com/explore/dataset/noaa-daily-weather-data/download/\?format\=csv\&timezone\=Europe/Berlin\&lang\=en\&use_labels_for_header\=true\&csv_separator\=%3B -o seeds/noaa-daily-weather-data.csv
+curl -X 'GET' \
+  'https://public.opendatasoft.com/api/v2/catalog/datasets/noaa-daily-weather-data/exports/csv?limit=-1&offset=0&refine=country_code:US&refine=date:2016&timezone=UTC' \
+  -H 'accept: */*' > seeds/daily_weather_us_2016.csv
 ```
 While you wait, go and grab yourself a cup of :coffee: or :tea:.
 
@@ -159,7 +167,7 @@ Following resources were used for this demonstration project besides the ones al
 * Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
   the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
 * Fix the Snowflake screenshots.
-* Add Airbyte and maybe later Dagster
+* Mention also Dagster als complementing tool
 
 [**A**irbyte]:https://airbyte.com/
 [Google BigQuery]: https://cloud.google.com/bigquery
@@ -167,7 +175,7 @@ Following resources were used for this demonstration project besides the ones al
 [Transaction Processing Performance Council (TPC)]: https://www.tpc.org/
 [Snowflake]: https://www.snowflake.com/
 [Snowpark]: https://www.snowflake.com/snowpark/
-[**L**igthdash]: https://www.lightdash.com/
+[**L**ightdash]: https://www.lightdash.com/
 [dbt]: https://www.getdbt.com/
 [**D**BT]: https://www.getdbt.com/
 [dbt Core]: https://github.com/dbt-labs/dbt-core
