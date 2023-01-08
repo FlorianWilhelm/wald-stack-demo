@@ -2,7 +2,7 @@
 
 The name **WALD**-stack stems from the four technologies it is composed of, i.e. a cloud-computing **W**arehouse
 like [Snowflake] or [Google BigQuery], the open-source data integration engine [**A**irbyte], the open-source full-stack
-BI platform [**L**igthdash], and the open-source data transformation tool [**D**BT].
+BI platform [**L**ightdash], and the open-source data transformation tool [**D**BT].
 
 This demonstration projects showcases the Wald-stack in a minimal example. It makes use of the [TPC-H dataset] by the
 [Transaction Processing Performance Council (TPC)] and the data warehouse [Snowflake]. To allow the definition of
@@ -110,7 +110,23 @@ curl -X 'GET' \
   'https://public.opendatasoft.com/api/v2/catalog/datasets/noaa-daily-weather-data/exports/csv?limit=-1&offset=0&refine=country_code:US&refine=date:2016&timezone=UTC' \
   -H 'accept: */*' > seeds/daily_weather_us_2016.csv
 ```
-While you wait, go and grab yourself a cup of :coffee: or :tea:.
+While you wait, go and grab yourself a cup of :coffee: or :tea:. The file should have about 551MB.
+After we have downloaded the file we need to copy it into the running Airbyte [docker] container with:
+```commandline
+docker cp seeds/daily_weather_us_2016.csv airbyte-server:/tmp/workspace/daily_weather_us_216.csv
+```
+
+Let's fire up the Airbyte Web-GUI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-welcome.png" alt="Welcome screen of Airbyte" width="500" role="img">
+</div>
+Now click on <kbd>Create your first connection</kbd> and select `File` as source type and fill out the form like this:
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-source.png" alt="Source selection of Airbyte" width="500" role="img">
+</div>
+
+
+
 
 ### **L**ightdash
 
