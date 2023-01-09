@@ -24,11 +24,13 @@ and open-source alternative to [Anaconda].
    1. [register a 30-day free trial Snowflake account] and choose the standard edition, AWS as cloud provider and any
       region you want,
    2. check the Snowflake e-mail for your *account-identifier*, which is specified by the URL you are given, e.g.
-      like `https://<account_name>.snowflakecomputing.com`,
+      like `https://<account_identifier>.snowflakecomputing.com`,
    3. [log into Snowflake's Snowsight UI] using your *account-identifier*,
-   4. check if [Snowflake's TPC-H sample database] `SNOWFLAKE_SAMPLE_DATA` is available under <kbd>Data</kbd> » kbd>Databases</kbd>
+   4. check if [Snowflake's TPC-H sample database] `SNOWFLAKE_SAMPLE_DATA` is available under <kbd>Data</kbd> » <kbd>Databases</kbd>
       or create it under <kbd>Data</kbd> » <kbd>Private Sharing</kbd> » <kbd>SAMPLE_DATA</kbd> and name it `SNOWFLAKE_SAMPLE_DATA`.<br>
-   5. [activate Snowpark and third-party packages] by clicking on your login name followed by <kbd>Switch Role</kbd> » <kbd>ORGADMIN</kbd>.
+   5. create a new database named `MY_DB` by clicking <kbd>Data</kbd> » <kbd>Databases</kbd> » <kbd>+ Database</kbd> (upper right corner)
+      and entering `MY_DB` in the emerging New Database form,
+   6. [activate Snowpark and third-party packages] by clicking on your login name followed by <kbd>Switch Role</kbd> » <kbd>ORGADMIN</kbd>.
       Only if <kbd>ORGADMIN</kbd> doesn't show in the drop-down menu, go to <kbd>Worksheets</kbd> » <kbd>+ Worksheet</kbd> and execute:
       ```SQL
       use role accountadmin;
@@ -38,11 +40,11 @@ and open-source alternative to [Anaconda].
       This should add `ORGADMIN` to the list. Now click <kbd>Admin</kbd> » <kbd>Billing</kbd> » <kbd>Terms & Billing</kbd>,
       and click <kbd>Enable</kbd> next to `Anaconda Python packages`. The Anaconda Packages (Preview Feature) dialog opens,
       and you need to agree to the terms by clicking <kbd>Acknowledge & Continue</kbd>.
-   6. choose a warehouse (which is a compute-cluster in Snowflake-speak) by clicking on <kbd>Worksheets</kbd> and selecting
+   7. choose a warehouse (which is a compute-cluster in Snowflake-speak) by clicking on <kbd>Worksheets</kbd> and selecting
       <kbd>Tutorial 1: Sample queries on TPC-H data</kbd>. Now click on the role button showing <kbd>ACCOUNTADMIN · No Warehouse</kbd>
       on the upper right and select the warehouse <kbd>COMPUTE_WH</kbd> or create a new one. Note the name of the warehouse
       for the dbt setup later,
-   7. execute *all* statements from the tutorial worksheet to see if everything was set up correctly.
+   8. execute *all* statements from the tutorial worksheet to see if everything was set up correctly.
 
 2. Setting up [**D**BT] and [Snowpark] locally, i.e.:
    1. clone this repository with `git clone https://github.com/FlorianWilhelm/wald-stack-demo.git`,
@@ -115,18 +117,34 @@ After we have downloaded the file we need to copy it into the running Airbyte [d
 ```commandline
 docker cp seeds/daily_weather_us_2016.csv airbyte-server:/tmp/workspace/daily_weather_us_216.csv
 ```
+It is certainly not necessary to point out that this is purely for testing the stack and in a production setting, one
+would rather choose some S3 bucket or a completely different data source like [Kafka].
 
 Let's fire up the Airbyte Web-GUI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-welcome.png" alt="Welcome screen of Airbyte" width="500" role="img">
 </div>
+
 Now click on <kbd>Create your first connection</kbd> and select `File` as source type and fill out the form like this:
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-source.png" alt="Source selection of Airbyte" width="500" role="img">
 </div>
 
+Hit <kbd>Set up Source</kbd> and select `Snowflake` in the next form as destination type. No you should see a detailed form
+to set up the Snowflake destination. Enter the values like this with the corresponding settings from the Snowflake setup
+from above. Remember that the `host` url follows the schema `<account_identifier>.snowflakecomputing.com`.
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-destination.png" alt="Destination selection of Airbyte" width="500" role="img">
+</div>
 
-
+Then hit <kbd>Set up destination</kbd> and see a new form popping up. We just stick with the sane defaults provided to us.
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-setup-details.png" alt="Setup details of Airbyte connection" width="500" role="img">
+</div>
+After hitting <kbd>Set up connection</kbd>, you should see that Airbyte starts syncing our weatherdata to Snowflake.
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-sync.png" alt="Airbyte syncs the weather data" width="500" role="img">
+</div>
 
 ### **L**ightdash
 
@@ -214,3 +232,4 @@ Following resources were used for this demonstration project besides the ones al
 [Anaconda]: https://www.anaconda.com/products/distribution
 [Python]: https://www.python.org/
 [weather data from opendatasoft]: https://public.opendatasoft.com/explore/dataset/noaa-daily-weather-data/
+[Kafka]: https://kafka.apache.org/
