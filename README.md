@@ -28,7 +28,7 @@ and open-source alternative to [Anaconda].
    3. [log into Snowflake's Snowsight UI] using your *account-identifier*,
    4. check if [Snowflake's TPC-H sample database] `SNOWFLAKE_SAMPLE_DATA` is available under <kbd>Data</kbd> » <kbd>Databases</kbd>
       or create it under <kbd>Data</kbd> » <kbd>Private Sharing</kbd> » <kbd>SAMPLE_DATA</kbd> and name it `SNOWFLAKE_SAMPLE_DATA`.<br>
-   5. create a new database named `MY_DB` by clicking <kbd>Data</kbd> » <kbd>Databases</kbd> » <kbd>+ Database</kbd> (upper right corner)
+   5. create a new database named `MY_DB` with owner `ACCOUNTADMIN` by clicking <kbd>Data</kbd> » <kbd>Databases</kbd> » <kbd>+ Database</kbd> (upper right corner)
       and entering `MY_DB` in the emerging New Database form,
    6. [activate Snowpark and third-party packages] by clicking on your login name followed by <kbd>Switch Role</kbd> » <kbd>ORGADMIN</kbd>.
       Only if <kbd>ORGADMIN</kbd> doesn't show in the drop-down menu, go to <kbd>Worksheets</kbd> » <kbd>+ Worksheet</kbd> and execute:
@@ -130,7 +130,7 @@ Now click on <kbd>Create your first connection</kbd> and select `File` as source
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-source.png" alt="Source selection of Airbyte" width="500" role="img">
 </div>
 
-Hit <kbd>Set up Source</kbd> and select `Snowflake` in the next form as destination type. No you should see a detailed form
+Hit <kbd>Set up Source</kbd> and select <kbd>Snowflake</kbd> in the next form as destination type. No you should see a detailed form
 to set up the Snowflake destination. Enter the values like this with the corresponding settings from the Snowflake setup
 from above. Remember that the `host` url follows the schema `<account_identifier>.snowflakecomputing.com`.
 <div align="center">
@@ -141,10 +141,18 @@ Then hit <kbd>Set up destination</kbd> and see a new form popping up. We just st
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-setup-details.png" alt="Setup details of Airbyte connection" width="500" role="img">
 </div>
-After hitting <kbd>Set up connection</kbd>, you should see that Airbyte starts syncing our weatherdata to Snowflake.
+
+After hitting <kbd>Set up connection</kbd>, you should see that Airbyte starts syncing our weather data to Snowflake.
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-sync.png" alt="Airbyte syncs the weather data" width="500" role="img">
 </div>
+
+After about 15 minutes the sync should be successfully completed.
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-sync-succeeded.png" alt="Airbyte sync succeeded" width="500" role="img">
+</div>
+
+Airbyte has a lot more to offer since it has hundreds of sources and destinations for syncing. For our demonstration, however, that is all we need.
 
 ### **L**ightdash
 
@@ -200,7 +208,6 @@ Following resources were used for this demonstration project besides the ones al
 
 * Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
   the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
-* Fix the Snowflake screenshots.
 * Mention also Dagster als complementing tool
 
 [**A**irbyte]:https://airbyte.com/
