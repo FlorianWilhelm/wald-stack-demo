@@ -109,6 +109,8 @@ and open-source alternative to [Anaconda].
 
 ### Ingesting the weather data with Airbyte
 
+
+
 To get our hands on some data we can ingest into our warehouse, let's just download some [weather data from opendatasoft]
 and put it into our `seeds` folder. In order to do so, just run inside the `wald-stack-demo` folder:
 ```commandline
@@ -123,6 +125,14 @@ docker cp seeds/daily_weather_us_2016.csv airbyte-server:/tmp/workspace/daily_we
 ```
 It is certainly not necessary to point out that this is purely for testing the stack and in a production setting, one
 would rather choose some S3 bucket or a completely different data source like [Kafka].
+
+Before we start using Airbyte, let's first set up a new database and schema for the data we are about to ingest.
+Open a notebook in Snowsight and execute:
+```sql
+CREATE DATABASE WEATHER;
+USE DATABASE WEATHER;
+CREATE SCHEMA RAW;
+```
 
 Let's fire up the Airbyte Web-GUI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
 <div align="center">
@@ -197,8 +207,9 @@ The following figure shows database entities, relationships, and characteristics
 of the [Kaggle Formula 1 World Championship dataset], which we are using for this demonstration.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/db-schema.png" alt="Formula 1 database schemas" width="700" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/db-schema.png" alt="Formula 1 database schemas" width="800" role="img">
 </div>
+
 
 ## Credits
 
@@ -220,9 +231,9 @@ Following resources were used for this demonstration project besides the ones al
 
 ## ToDos
 
-* Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
+- [ ] Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
   the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
-* Mention also Dagster als complementing tool
+- [ ] Mention also Dagster as a complementary tool
 
 [**A**irbyte]:https://airbyte.com/
 [Google BigQuery]: https://cloud.google.com/bigquery
