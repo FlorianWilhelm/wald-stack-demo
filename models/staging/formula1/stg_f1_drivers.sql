@@ -4,10 +4,10 @@ source  as (
 
     select * from {{ source('formula1','drivers') }}
 
-), 
+),
 
 renamed as (
-    select 
+    select
        driverid as driver_id,
        driverref as driver_ref,
        number as driver_number,
@@ -20,4 +20,4 @@ renamed as (
     from source
 )
 
-select * from renamed 
+select * from renamed

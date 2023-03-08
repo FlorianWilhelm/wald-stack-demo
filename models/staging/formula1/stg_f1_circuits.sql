@@ -4,10 +4,10 @@ source  as (
 
     select * from {{ source('formula1','circuits') }}
 
-), 
+),
 
 renamed as (
-    select 
+    select
         circuitid as circuit_id,
         circuitref as circuit_ref,
         name as circuit_name,

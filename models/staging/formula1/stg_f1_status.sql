@@ -4,13 +4,13 @@ source  as (
 
     select * from {{ source('formula1','status') }}
 
-), 
+),
 
 renamed as (
-    select 
+    select
         statusid as status_id,
-        status 
+        status
     from source
 )
 
-select * from renamed 
+select * from renamed
