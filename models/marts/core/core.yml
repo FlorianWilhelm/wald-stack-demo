@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: weather
+    database: weather
+    schema: raw
+    tables:
+      - name: cameri

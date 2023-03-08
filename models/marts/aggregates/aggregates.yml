@@ -21,11 +21,3 @@ models:
 
   - name: weather_analysis
     description: Analysis of the weather effects on the race results of the Monza Grand Prix
-
-
-sources:
-  - name: weather
-    database: weather
-    schema: raw
-    tables:
-      - name: cameri
