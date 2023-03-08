@@ -126,34 +126,34 @@ would rather choose some S3 bucket or a completely different data source like [K
 
 Let's fire up the Airbyte Web-GUI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-welcome.png" alt="Welcome screen of Airbyte" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-welcome.png" alt="Welcome screen of Airbyte" width="500" role="img">
 </div>
 
 Now click on <kbd>Create your first connection</kbd> and select `File` as source type and fill out the form like this:
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-source.png" alt="Source selection of Airbyte" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-source.png" alt="Source selection of Airbyte" width="500" role="img">
 </div>
 
 Hit <kbd>Set up Source</kbd> and select <kbd>Snowflake</kbd> in the next form as destination type. No you should see a detailed form
 to set up the Snowflake destination. Enter the values like this with the corresponding settings from the Snowflake setup
 from above. Remember that the `host` url follows the schema `<account_identifier>.snowflakecomputing.com`.
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-destination.png" alt="Destination selection of Airbyte" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-destination.png" alt="Destination selection of Airbyte" width="500" role="img">
 </div>
 
 Then hit <kbd>Set up destination</kbd> and see a new form popping up. We just stick with the sane defaults provided to us.
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-setup-details.png" alt="Setup details of Airbyte connection" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-setup-details.png" alt="Setup details of Airbyte connection" width="500" role="img">
 </div>
 
 After hitting <kbd>Set up connection</kbd>, you should see that Airbyte starts syncing our weather data to Snowflake.
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-sync.png" alt="Airbyte syncs the weather data" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-sync.png" alt="Airbyte syncs the weather data" width="500" role="img">
 </div>
 
 After about 15 minutes the sync should be successfully completed.
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/airbyte-sync-succeeded.png" alt="Airbyte sync succeeded" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-sync-succeeded.png" alt="Airbyte sync succeeded" width="500" role="img">
 </div>
 
 Airbyte has a lot more to offer since it has hundreds of sources and destinations for syncing. For our demonstration, however, that is all we need.
@@ -191,13 +191,13 @@ passed.
 * **bring down and clean volumes**: `docker-compose -f docker-compose.yml down -v`
 
 
-## TPC-H Sample Data
+## Formula 1 World Championship Data
 
-The following figure from the [TPC-H Benchmark documentation] shows database entities, relationships, and characteristics
-of the data we are using for this demonstration.
+The following figure shows database entities, relationships, and characteristics
+of the [Kaggle Formula 1 World Championship] data, which we are using for this demonstration.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/tpch.png" alt="TPC-H table metadata" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/db-schema.png" alt="Formula 1 database schemas" width="500" role="img">
 </div>
 
 ## References & Resources
@@ -254,3 +254,4 @@ Following resources were used for this demonstration project besides the ones al
 [Overview Quickstart ML with Snowpark for Python]: https://quickstarts.snowflake.com/guide/getting_started_snowpark_machine_learning/
 [Advanced Quickstart ML with Snowpark for Python]: https://quickstarts.snowflake.com/guide/machine_learning_with_snowpark_python
 [Quickstart Data Engineering with Snowpark for Python and dbt]: https://quickstarts.snowflake.com/guide/data_engineering_with_snowpark_python_and_dbt
+[Kaggle Formula 1 World Championship]: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
