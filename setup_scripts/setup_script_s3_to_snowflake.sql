@@ -1,6 +1,8 @@
 /*
 This is our setup script to create a new database for the Formula1 data in Snowflake.
-We are copying data from a public s3 bucket into snowflake by defining our csv format and snowflake stage.
+We are copying data from a public s3 bucket into Snowflake by defining our csv format and snowflake stage.
+
+The original data is from https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
 */
 -- create and define our formula1 database
 create or replace database formula1;
@@ -22,7 +24,6 @@ url = 's3://formula1-dbt-cloud-python-demo/formula1-kaggle-data/';
 
 -- load in the 8 tables we need for our demo
 -- we are first creating the table then copying our data in from s3
--- think of this as an empty container or shell that we are then filling
 create or replace table formula1.raw.circuits (
 	CIRCUITID NUMBER(38,0),
 	CIRCUITREF VARCHAR(16777216),
@@ -32,7 +33,8 @@ create or replace table formula1.raw.circuits (
 	LAT FLOAT,
 	LNG FLOAT,
 	ALT NUMBER(38,0),
-	URL VARCHAR(16777216)
+	URL VARCHAR(16777216),
+	PRIMARY KEY (CIRCUITID)
 );
 -- copy our data from public s3 bucket into our tables
 copy into circuits
@@ -44,7 +46,8 @@ create or replace table formula1.raw.constructors (
 	CONSTRUCTORREF VARCHAR(16777216),
 	NAME VARCHAR(16777216),
 	NATIONALITY VARCHAR(16777216),
-	URL VARCHAR(16777216)
+	URL VARCHAR(16777216),
+	PRIMARY KEY (CONSTRUCTORID)
 );
 copy into constructors
 from @formula1_stage/constructors.csv
@@ -59,35 +62,11 @@ create or replace table formula1.raw.drivers (
 	SURNAME VARCHAR(16777216),
 	DOB DATE,
 	NATIONALITY VARCHAR(16777216),
-	URL VARCHAR(16777216)
+	URL VARCHAR(16777216),
+	PRIMARY KEY (DRIVERID)
 );
 copy into drivers
 from @formula1_stage/drivers.csv
-on_error='continue';
-
-create or replace table formula1.raw.lap_times (
-	RACEID NUMBER(38,0),
-	DRIVERID NUMBER(38,0),
-	LAP NUMBER(38,0),
-	POSITION FLOAT,
-	TIME VARCHAR(16777216),
-	MILLISECONDS NUMBER(38,0)
-);
-copy into lap_times
-from @formula1_stage/lap_times.csv
-on_error='continue';
-
-create or replace table formula1.raw.pit_stops (
-	RACEID NUMBER(38,0),
-	DRIVERID NUMBER(38,0),
-	STOP NUMBER(38,0),
-	LAP NUMBER(38,0),
-	TIME VARCHAR(16777216),
-	DURATION VARCHAR(16777216),
-	MILLISECONDS NUMBER(38,0)
-);
-copy into pit_stops
-from @formula1_stage/pit_stops.csv
 on_error='continue';
 
 create or replace table formula1.raw.races (
@@ -108,10 +87,50 @@ create or replace table formula1.raw.races (
 	QUALI_DATE VARCHAR(16777216),
 	QUALI_TIME VARCHAR(16777216),
 	SPRINT_DATE VARCHAR(16777216),
-	SPRINT_TIME VARCHAR(16777216)
+	SPRINT_TIME VARCHAR(16777216),
+	PRIMARY KEY (RACEID),
+	FOREIGN KEY (CIRCUITID) REFERENCES formula1.raw.circuits(CIRCUITID)
 );
 copy into races
 from @formula1_stage/races.csv
+on_error='continue';
+
+create or replace table formula1.raw.lap_times (
+	RACEID NUMBER(38,0),
+	DRIVERID NUMBER(38,0),
+	LAP NUMBER(38,0),
+	POSITION FLOAT,
+	TIME VARCHAR(16777216),
+	MILLISECONDS NUMBER(38,0),
+	FOREIGN KEY (RACEID) REFERENCES formula1.raw.races(RACEID),
+	FOREIGN KEY (DRIVERID) REFERENCES formula1.raw.drivers(DRIVERID)
+);
+copy into lap_times
+from @formula1_stage/lap_times.csv
+on_error='continue';
+
+create or replace table formula1.raw.pit_stops (
+	RACEID NUMBER(38,0),
+	DRIVERID NUMBER(38,0),
+	STOP NUMBER(38,0),
+	LAP NUMBER(38,0),
+	TIME VARCHAR(16777216),
+	DURATION VARCHAR(16777216),
+	MILLISECONDS NUMBER(38,0),
+	FOREIGN KEY (RACEID) REFERENCES formula1.raw.races(RACEID),
+	FOREIGN KEY (DRIVERID) REFERENCES formula1.raw.drivers(DRIVERID)
+);
+copy into pit_stops
+from @formula1_stage/pit_stops.csv
+on_error='continue';
+
+create or replace table formula1.raw.status (
+	STATUSID NUMBER(38,0),
+	STATUS VARCHAR(16777216),
+	PRIMARY KEY (STATUSID)
+);
+copy into status
+from @formula1_stage/status.csv
 on_error='continue';
 
 create or replace table formula1.raw.results (
@@ -132,16 +151,13 @@ create or replace table formula1.raw.results (
 	RANK NUMBER(38,0),
 	FASTESTLAPTIME VARCHAR(16777216),
 	FASTESTLAPSPEED FLOAT,
-	STATUSID NUMBER(38,0)
+	STATUSID NUMBER(38,0),
+	PRIMARY KEY (RESULTID),
+	FOREIGN KEY (RACEID) REFERENCES formula1.raw.races(RACEID),
+	FOREIGN KEY (DRIVERID) REFERENCES formula1.raw.drivers(DRIVERID),
+	FOREIGN KEY (CONSTRUCTORID) REFERENCES formula1.raw.constructors(CONSTRUCTORID),
+	FOREIGN KEY (STATUSID) REFERENCES formula1.raw.status(STATUSID)
 );
 copy into results
 from @formula1_stage/results.csv
-on_error='continue';
-
-create or replace table formula1.raw.status (
-	STATUSID NUMBER(38,0),
-	STATUS VARCHAR(16777216)
-);
-copy into status
-from @formula1_stage/status.csv
 on_error='continue';
