@@ -1,0 +1,94 @@
+version: 2
+models:
+  - name: stg_f1_results
+    columns:
+      - name: result_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: race_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: constructor_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver_number
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: grid
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: position
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: position_text
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: position_order
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: points
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: laps
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: results_time_formatted
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: results_milliseconds
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: fastest_lap
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: results_rank
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: fastest_lap_time_formatted
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: fastest_lap_speed
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: status_id
+        description: ""
+        meta:
+          dimension:
+            type: number

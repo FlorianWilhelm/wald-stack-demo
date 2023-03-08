@@ -1,86 +1,6 @@
 version: 2
 models:
-  - name: fastest_pit_stops_by_constructor
-    description: >-
-      Use the python .describe() method to retrieve summary statistics table
-      about pit stops by constructor. Sort by average stop time ascending so the
-      first row returns the fastest constructor.
-    columns:
-      - name: constructor_name
-        description: team that makes the car
-        tests:
-          - unique
-        meta:
-          dimension:
-            type: string
-      - name: count
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: mean
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: std
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: min
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: 25%
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: 50%
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: 75%
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: max
-        description: ""
-        meta:
-          dimension:
-            type: number
-  - name: lap_times_moving_avg
-    description: >-
-      Use the python .rolling() method to calculate the 5 year rolling average
-      of pit stop times alongside the average for each year.
-    columns:
-      - name: race_year
-        description: year of the race
-        tests:
-          - relationships:
-              to: ref('int_lap_times_years')
-              field: race_year
-        meta:
-          dimension:
-            type: number
-      - name: lap_time_seconds
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: lap_moving_avg_5_years
-        description: ""
-        meta:
-          dimension:
-            type: number
-  - name: weather_analysis
-    description: >-
-      Analysis of the weather effects on the race results of the Monza Grand
-      Prix
+  - name: fct_results
     columns:
       - name: result_id
         description: ""
@@ -92,11 +12,6 @@ models:
         meta:
           dimension:
             type: number
-      - name: race_name
-        description: ""
-        meta:
-          dimension:
-            type: string
       - name: race_year
         description: ""
         meta:
@@ -107,6 +22,11 @@ models:
         meta:
           dimension:
             type: number
+      - name: race_name
+        description: ""
+        meta:
+          dimension:
+            type: string
       - name: circuit_id
         description: ""
         meta:
@@ -117,6 +37,41 @@ models:
         meta:
           dimension:
             type: string
+      - name: circuit_ref
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: location
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: country
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: latitude
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: longitude
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: altitude
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: total_pit_stops_per_race
+        description: ""
+        meta:
+          dimension:
+            type: number
       - name: race_date
         description: ""
         meta:
@@ -132,16 +87,16 @@ models:
         meta:
           dimension:
             type: number
-      - name: driver_number
-        description: ""
-        meta:
-          dimension:
-            type: number
       - name: driver
         description: ""
         meta:
           dimension:
             type: string
+      - name: driver_number
+        description: ""
+        meta:
+          dimension:
+            type: number
       - name: drivers_age_years
         description: ""
         meta:
@@ -167,26 +122,6 @@ models:
         meta:
           dimension:
             type: string
-      - name: prcp
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: rained
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: tmin
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: tmax
-        description: ""
-        meta:
-          dimension:
-            type: number
       - name: grid
         description: ""
         meta:

@@ -1,0 +1,44 @@
+version: 2
+models:
+  - name: stg_f1_drivers
+    columns:
+      - name: driver_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver_ref
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: driver_number
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: driver_code
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: forename
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: surname
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: date_of_birth
+        description: ""
+        meta:
+          dimension:
+            type: date
+      - name: driver_nationality
+        description: ""
+        meta:
+          dimension:
+            type: string

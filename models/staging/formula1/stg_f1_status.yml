@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: stg_f1_status
+    columns:
+      - name: status_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: status
+        description: ""
+        meta:
+          dimension:
+            type: string

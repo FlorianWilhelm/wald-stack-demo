@@ -1,0 +1,44 @@
+version: 2
+models:
+  - name: stg_f1_circuits
+    columns:
+      - name: circuit_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: circuit_ref
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: circuit_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: location
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: country
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: latitude
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: longitude
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: altitude
+        description: ""
+        meta:
+          dimension:
+            type: number

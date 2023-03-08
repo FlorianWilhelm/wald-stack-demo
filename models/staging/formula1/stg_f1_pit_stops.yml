@@ -1,0 +1,39 @@
+version: 2
+models:
+  - name: stg_f1_pit_stops
+    columns:
+      - name: race_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: stop_number
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: lap
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: lap_time_formatted
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: pit_stop_duration_seconds
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: pit_stop_milliseconds
+        description: ""
+        meta:
+          dimension:
+            type: number

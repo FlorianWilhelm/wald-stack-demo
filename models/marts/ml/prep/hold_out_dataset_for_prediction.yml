@@ -1,0 +1,54 @@
+version: 2
+models:
+  - name: hold_out_dataset_for_prediction
+    columns:
+      - name: race_year
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: circuit_name
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: grid
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: constructor_name
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: drivers_age_years
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver_confidence
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: constructor_relaiblity
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: total_pit_stops_per_race
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: position_label
+        description: ""
+        meta:
+          dimension:
+            type: number

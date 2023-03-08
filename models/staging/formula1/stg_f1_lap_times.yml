@@ -1,0 +1,34 @@
+version: 2
+models:
+  - name: stg_f1_lap_times
+    columns:
+      - name: race_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: lap
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: position
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: lap_time_formatted
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: lap_time_milliseconds
+        description: ""
+        meta:
+          dimension:
+            type: number

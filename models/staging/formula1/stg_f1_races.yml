@@ -1,0 +1,89 @@
+version: 2
+models:
+  - name: stg_f1_races
+    columns:
+      - name: race_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: race_year
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: race_round
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: circuit_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: race_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: race_date
+        description: ""
+        meta:
+          dimension:
+            type: date
+      - name: race_time
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: free_practice_1_date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: free_practice_1_time
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: free_practice_2_date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: free_practice_2_time
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: free_practice_3_date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: free_practice_3_time
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: qualifying_date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: qualifying_time
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: sprint_date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: sprint_time
+        description: ""
+        meta:
+          dimension:
+            type: string
