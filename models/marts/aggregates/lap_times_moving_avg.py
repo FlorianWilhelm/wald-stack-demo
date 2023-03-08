@@ -1,4 +1,4 @@
-import pandas as pd
+"""Determine the average of lap times moving"""
 
 
 def model(dbt, session):

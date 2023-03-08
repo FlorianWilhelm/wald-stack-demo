@@ -1,7 +1,5 @@
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
+"""Create encoding of covariates, i.e. features"""
+from sklearn.preprocessing import LabelEncoder
 
 
 def model(dbt, session):

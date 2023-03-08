@@ -1,4 +1,4 @@
-import logging
+"""Predict the position on the hold-out dataset"""
 import os
 
 import joblib
@@ -12,7 +12,7 @@ model_file_path = "driver_position_" + version
 model_file_packaged = "driver_position_" + version + ".joblib"
 
 # This is a local directory, used for storing the various artifacts locally
-LOCAL_TEMP_DIR = f"/tmp/driver_position"
+LOCAL_TEMP_DIR = "/tmp/driver_position"
 DOWNLOAD_DIR = os.path.join(LOCAL_TEMP_DIR, "download")
 TARGET_MODEL_DIR_PATH = os.path.join(LOCAL_TEMP_DIR, "ml_model")
 TARGET_LIB_PATH = os.path.join(LOCAL_TEMP_DIR, "lib")
@@ -33,7 +33,6 @@ FEATURE_COLS = [
 
 
 def register_udf_for_prediction(p_predictor, p_session, p_dbt):
-
     # The prediction udf
 
     def predict_position(
@@ -54,7 +53,7 @@ def register_udf_for_prediction(p_predictor, p_session, p_dbt):
     udf_packages = p_dbt.config.get("packages")
 
     predict_position_udf = p_session.udf.register(
-        predict_position, name=f"predict_position", packages=udf_packages
+        predict_position, name="predict_position", packages=udf_packages
     )
     return predict_position_udf
 

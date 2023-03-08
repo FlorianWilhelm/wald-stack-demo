@@ -1,15 +1,14 @@
-import pandas as pd
+"""Train-test split"""
 
 
 def model(dbt, session):
-
     # dbt configuration
     dbt.config(packages=["pandas"], tags="train")
 
     # get upstream data
     encoding = dbt.ref("covariate_encoding").to_pandas()
 
-    # provide years so we do not hardcode dates in filter command
+    # provide years, so we do not hardcode dates in filter command
     start_year = 2010
     end_year = 2019
 

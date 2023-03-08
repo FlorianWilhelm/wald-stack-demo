@@ -1,5 +1,4 @@
-import numpy as np
-import pandas as pd
+"""Determine the fastest pit stops"""
 
 
 def model(dbt, session):

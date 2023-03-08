@@ -1,4 +1,4 @@
-import pandas as pd
+"""Create hold-out set for predictions"""
 
 
 def model(dbt, session):

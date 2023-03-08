@@ -1,4 +1,4 @@
-import pandas as pd
+"""General data preparations and feature generation"""
 
 
 def model(dbt, session):
@@ -8,7 +8,7 @@ def model(dbt, session):
     # get upstream data
     fct_results = dbt.ref("fct_results").to_pandas()
 
-    # provide years so we do not hardcode dates in filter command
+    # provide years, so we do not hardcode dates in filter command
     start_year = 2010
     end_year = 2020
 
@@ -21,7 +21,7 @@ def model(dbt, session):
     # we cannot have nulls if we want to use total pit stops
     data["TOTAL_PIT_STOPS_PER_RACE"] = data["TOTAL_PIT_STOPS_PER_RACE"].fillna(0)
 
-    # some of the constructors changed their name over the year so replacing old names with current name
+    # some constructors changed their name over the year so replacing old names with current name
     mapping = {
         "Force India": "Racing Point",
         "Sauber": "Alfa Romeo",
@@ -88,7 +88,7 @@ def model(dbt, session):
         "Nicholas Latifi",
     ]
 
-    # create flags for active drivers and constructors so we can filter downstream
+    # create flags for active drivers and constructors, so we can filter downstream
     data["ACTIVE_DRIVER"] = data["DRIVER"].apply(lambda x: int(x in active_drivers))
     data["ACTIVE_CONSTRUCTOR"] = data["CONSTRUCTOR_NAME"].apply(
         lambda x: int(x in active_constructors)

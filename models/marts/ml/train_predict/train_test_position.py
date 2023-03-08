@@ -18,8 +18,6 @@ def save_file(session, model, path, dest_filename):
     return "successfully created file: " + path
 
 
-
-
 def model(dbt, session):
     dbt.config(
         packages=["numpy", "scikit-learn", "pandas", "numpy", "joblib", "cachetools"],
