@@ -1,16 +1,14 @@
 import io
 import logging
-import sys
 
 import joblib
 import pandas as pd
 import snowflake.snowpark.functions as F
-from joblib import dump, load
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import balanced_accuracy_score, confusion_matrix
+from sklearn.metrics import balanced_accuracy_score
 from sklearn.model_selection import train_test_split
 
-logger = logging.getLogger("mylog")
+logger = logging.getLogger(__name__)
 
 
 def save_file(session, model, path, dest_filename):
@@ -18,6 +16,8 @@ def save_file(session, model, path, dest_filename):
     joblib.dump(model, input_stream)
     session._conn.upload_stream(input_stream, path, dest_filename)
     return "successfully created file: " + path
+
+
 
 
 def model(dbt, session):
@@ -56,9 +56,20 @@ def model(dbt, session):
 
     # fit the preprocessing pipeline and the model together
     model.fit(X_train, y_train)
+    y_pred = model.predict_proba(X_train)[:, 1]
+    predictions = [round(value) for value in y_pred]
+    balanced_accuracy = pd.Series(
+        balanced_accuracy_score(y_train, predictions), name="accuracy"
+    ).to_frame()
+    train.append(balanced_accuracy)
+
+    # predict on the test set
     y_pred = model.predict_proba(X_test)[:, 1]
     predictions = [round(value) for value in y_pred]
-    balanced_accuracy = balanced_accuracy_score(y_test, predictions)
+    balanced_accuracy = pd.Series(
+        balanced_accuracy_score(y_test, predictions), name="accuracy"
+    ).to_frame()
+    test.append(balanced_accuracy)
 
     # Save the model to a stage
     save_file(
