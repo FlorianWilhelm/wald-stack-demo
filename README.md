@@ -102,6 +102,9 @@ and open-source alternative to [Anaconda].
       ./scripts/install.sh # and choose "Custom install", enter the path to your dbt project from above
       ```
    3. check if the front-end comes up at [http://localhost:8080](http://localhost:8080).
+   4. install the `lightdash` CLI command following the [how-to-install-the-lightdash-cli] docs.
+   5. authenticate the CLI and connect the `wald_stack` dbt project by running `lightdash login http://localhost:8080`.
+
 
 ## Demonstration of the WALD-stack
 
@@ -254,13 +257,7 @@ passed.
 * **restart**: `docker-compose -f docker-compose.yml start`
 * **stop**: `docker-compose -f docker-compose.yml stop -v`
 * **bring down and clean volumes**: `docker-compose -f docker-compose.yml down -v`
-
-
-## Credits
-
-The dbt, Snowpark part of this demonstration is heavily based on the [python-snowpark-formula1 repository] as well as
-the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs] held on January 25th, 2023.
-
+* **lightdash CLI**: `lightdash`
 
 ## References & Resources
 <a name="references--resources"></a>
@@ -274,6 +271,13 @@ Following resources were used for this demonstration project besides the ones al
 * [Quickstart Data Engineering with Snowpark for Python and dbt] by Snowflake
 * [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python] by Ripu Jain and Anders Swanson
 * [dbt cheetsheet] by Bruno S. de Lima
+
+
+## Credits
+
+The dbt, Snowpark part of this demonstration is heavily based on the [python-snowpark-formula1 repository] as well as
+the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs] held on January 25th, 2023.
+
 
 ## ToDos
 
@@ -320,3 +324,4 @@ Following resources were used for this demonstration project besides the ones al
 [Scikit-Learn]: https://scikit-learn.org/
 [models/marts/aggregates]: ./models/marts/aggregates/
 [models/marts/ml]: ./models/marts/ml/
+[how-to-install-the-lightdash-cli]: https://docs.lightdash.com/guides/cli/how-to-install-the-lightdash-cli
