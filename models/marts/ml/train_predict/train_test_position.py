@@ -34,7 +34,7 @@ def model(dbt, session):
     # read in our training and testing upstream dataset
     test_train_df = dbt.ref("train_test_dataset")
 
-    #  cast snowpark df to pandas df
+    # cast snowpark df to pandas df
     test_train_pd_df = test_train_df.to_pandas()
     target_col = "POSITION_LABEL"
 
@@ -55,19 +55,17 @@ def model(dbt, session):
     # fit the preprocessing pipeline and the model together
     model.fit(X_train, y_train)
     y_pred = model.predict_proba(X_train)[:, 1]
-    predictions = [round(value) for value in y_pred]
-    balanced_accuracy = pd.Series(
-        balanced_accuracy_score(y_train, predictions), name="accuracy"
-    ).to_frame()
-    train.append(balanced_accuracy)
+    balanced_accuracy = balanced_accuracy_score(
+        y_train, [round(value) for value in y_pred]
+    )
+    logger.info(f"Balanced accuracy on training set: {balanced_accuracy:.2}")
 
     # predict on the test set
     y_pred = model.predict_proba(X_test)[:, 1]
-    predictions = [round(value) for value in y_pred]
-    balanced_accuracy = pd.Series(
-        balanced_accuracy_score(y_test, predictions), name="accuracy"
-    ).to_frame()
-    test.append(balanced_accuracy)
+    balanced_accuracy = balanced_accuracy_score(
+        y_test, [round(value) for value in y_pred]
+    )
+    logger.info(f"Balanced accuracy on training set: {balanced_accuracy:.2}")
 
     # Save the model to a stage
     save_file(
@@ -80,7 +78,7 @@ def model(dbt, session):
         "Model artifact:" + "@MODELSTAGE/driver_position_" + version + ".joblib"
     )
 
-    # Take our pandas training and testing dataframes and put them back into snowpark dataframes
+    # Take our pandas training and testing dataframes and put them back into Snowpark dataframes
     snowpark_train_df = session.write_pandas(
         pd.concat(train, axis=1, join="inner"),
         "train_table",
