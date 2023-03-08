@@ -12,7 +12,7 @@ renamed as (
         year as race_year,
         round as race_round,
         circuitid as circuit_id,
-        name as circuit_name,
+        name as race_name,
         date as race_date,
         to_time(time) as race_time,
         -- omit the url

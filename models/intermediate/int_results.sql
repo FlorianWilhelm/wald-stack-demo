@@ -10,6 +10,12 @@ races as (
 
 ),
 
+circuits as (
+
+  select * from {{ ref('stg_f1_circuits') }}
+
+),
+
 drivers as (
 
   select * from {{ ref('stg_f1_drivers') }}
@@ -32,9 +38,10 @@ int_results as (
     select
       result_id,
       results.race_id,
+      race_name,
       race_year,
       race_round,
-      circuit_id,
+      races.circuit_id,
       circuit_name,
       race_date,
       race_time,
@@ -63,13 +70,15 @@ int_results as (
       case when position is null then 1 else 0 end as dnf_flag
     from results
     left join races
-      on results.race_id=races.race_id
+      on results.race_id = races.race_id
     left join drivers
       on results.driver_id = drivers.driver_id
     left join constructors
       on results.constructor_id = constructors.constructor_id
     left join status
       on results.status_id = status.status_id
+    left join circuits
+      on races.circuit_id = circuits.circuit_id
  )
 
  select * from int_results

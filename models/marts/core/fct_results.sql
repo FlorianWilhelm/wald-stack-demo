@@ -26,6 +26,7 @@ circuits as (
         int_results.race_id,
         race_year,
         race_round,
+        race_name,
         int_results.circuit_id,
         int_results.circuit_name,
         circuit_ref,
@@ -62,9 +63,9 @@ circuits as (
         dnf_flag
      from int_results
      left join circuits
-        on int_results.circuit_id=circuits.circuit_id
+        on int_results.circuit_id = circuits.circuit_id
      left join int_pit_stops
-        on int_results.driver_id=int_pit_stops.driver_id and int_results.race_id=int_pit_stops.race_id
+        on int_results.driver_id = int_pit_stops.driver_id and int_results.race_id = int_pit_stops.race_id
  )
 
 select * from base_results
