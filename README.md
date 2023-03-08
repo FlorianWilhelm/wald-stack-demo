@@ -109,19 +109,10 @@ and open-source alternative to [Anaconda].
 
 ### Ingesting the weather data with Airbyte
 
-
-
-To get our hands on some data we can ingest into our warehouse, let's just download some [weather data from opendatasoft]
-and put it into our `seeds` folder. In order to do so, just run inside the `wald-stack-demo` folder:
+To get our hands on some data we can ingest into our warehouse, let's take some [weather data from opendatasoft], which
+is located in the `seeds` folder. For Airbyte to find it, we need to copy it into the running Airbyte [docker] container with:
 ```commandline
-curl -X 'GET' \
-  'https://public.opendatasoft.com/api/v2/catalog/datasets/noaa-daily-weather-data/exports/csv?limit=-1&offset=0&refine=country_code:US&refine=date:2016&timezone=UTC' \
-  -H 'accept: */*' > seeds/daily_weather_us_2016.csv
-```
-While you wait, go and grab yourself a cup of :coffee: or :tea:. The file should have about 551MB.
-After we have downloaded the file we need to copy it into the running Airbyte [docker] container with:
-```commandline
-docker cp seeds/daily_weather_us_2016.csv airbyte-server:/tmp/workspace/daily_weather_us_216.csv
+docker cp seeds/cameri_weather.csv airbyte-server:/tmp/workspace/cameri_weather.csv
 ```
 It is certainly not necessary to point out that this is purely for testing the stack and in a production setting, one
 would rather choose some S3 bucket or a completely different data source like [Kafka].
@@ -143,6 +134,12 @@ Now click on <kbd>Create your first connection</kbd> and select `File` as source
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-source.png" alt="Source selection of Airbyte" width="500" role="img">
 </div>
+
+For the `Reader Options`, just copy & paste the following string:
+
+```json
+{"sep":";", "header": 0, "names": ["ghcn_din", "date", "prcp", "snow", "tmax", "tmin", "elevation", "name", "coord", "country_code"]}
+```
 
 Hit <kbd>Set up Source</kbd> and select <kbd>Snowflake</kbd> in the next form as destination type. No you should see a detailed form
 to set up the Snowflake destination. Enter the values like this with the corresponding settings from the Snowflake setup
@@ -270,3 +267,6 @@ Following resources were used for this demonstration project besides the ones al
 [python-snowpark-formula1 repository]: https://github.com/dbt-labs/python-snowpark-formula1/
 [Hope Watson]: https://www.linkedin.com/in/hopewatson/
 [dbt labs]: https://www.getdbt.com/
+
+
+{"sep":";", "header": 0, "names": ["ghcn_din", "date", "prcp", "snow", "tmax", "tmin", "elevation", "name", "coord", "country_code"]}
