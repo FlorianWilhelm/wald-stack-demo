@@ -1,3 +1,7 @@
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/wald-stack-social-banner.png" alt="WALD stack logo" width="600" role="img">
+</div>
+
 # WALD: The Modern & Sustainable Analytics Stack
 
 The name **WALD**-stack stems from the four technologies it is composed of, i.e. a cloud-computing **W**arehouse
@@ -101,9 +105,9 @@ and open-source alternative to [Anaconda].
 
 ## Demonstration of the WALD-stack
 
-### **W**arehouse (Snowflake)
+### Demonstration use-case
 
-### **A**irbyte
+### Ingesting the weather data with Airbyte
 
 To get our hands on some data we can ingest into our warehouse, let's just download some [weather data from opendatasoft]
 and put it into our `seeds` folder. In order to do so, just run inside the `wald-stack-demo` folder:
@@ -153,6 +157,7 @@ After about 15 minutes the sync should be successfully completed.
 </div>
 
 Airbyte has a lot more to offer since it has hundreds of sources and destinations for syncing. For our demonstration, however, that is all we need.
+It should also be noted that uploading a simple csv file into Snowflake could also have been done using [dbt's seed] command.
 
 ### **L**ightdash
 
@@ -195,11 +200,15 @@ of the data we are using for this demonstration.
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/master/assets/images/tpch.png" alt="TPC-H table metadata" width="500" role="img">
 </div>
 
-## Resources
+## References & Resources
 
 Following resources were used for this demonstration project besides the ones already mentioned:
 
 * [A Beginner’s Guide to DBT (data build tool)] by Jessica Le
+* [Snowpark for Python Blog Post] by Caleb Baechtold
+* [Overview Quickstart ML with Snowpark for Python] by Snowflake
+* [Advanced Quickstart ML with Snowpark for Python] by Snowflake
+* [Quickstart Data Engineering with Snowpark for Python and dbt] by Snowflake
 * [Sample queries from tpch-dbgen] by Dragan Sahpaski
 * [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python] by Ripu Jain and Anders Swanson
 * [dbt cheetsheet] by Bruno S. de Lima
@@ -240,3 +249,8 @@ Following resources were used for this demonstration project besides the ones al
 [Python]: https://www.python.org/
 [weather data from opendatasoft]: https://public.opendatasoft.com/explore/dataset/noaa-daily-weather-data/
 [Kafka]: https://kafka.apache.org/
+[dbt's seed]: https://docs.getdbt.com/docs/build/seeds
+[Snowpark for Python Blog Post]: https://medium.com/snowflake/operationalizing-snowpark-python-part-one-892fcb3abba1
+[Overview Quickstart ML with Snowpark for Python]: https://quickstarts.snowflake.com/guide/getting_started_snowpark_machine_learning/
+[Advanced Quickstart ML with Snowpark for Python]: https://quickstarts.snowflake.com/guide/machine_learning_with_snowpark_python
+[Quickstart Data Engineering with Snowpark for Python and dbt]: https://quickstarts.snowflake.com/guide/data_engineering_with_snowpark_python_and_dbt
