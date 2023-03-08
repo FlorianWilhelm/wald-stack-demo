@@ -18,3 +18,14 @@ models:
           - relationships:
               to: ref('int_lap_times_years')
               field: race_year
+
+  - name: weather_analysis
+    description: Analysis of the weather effects on the race results of the Monza Grand Prix
+
+
+sources:
+  - name: weather
+    database: weather
+    schema: raw
+    tables:
+      - name: cameri

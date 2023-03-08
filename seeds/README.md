@@ -6,6 +6,13 @@ curl -X 'GET' \                                                                 
   -H 'accept: */*' > seeds/cameri_weather.csv
 ```
 
+Since the weather data was not always available on every day, following changes were made:
+
+- 2015-09-07 -> 2015-09-06
+- 2017-09-04 -> 2017-09-03
+- 2018-09-03 -> 2018-09-02
+
+
 It's public domain.
 
 [opendatasoft]: https://public.opendatasoft.com/explore/dataset/noaa-daily-weather-data/
