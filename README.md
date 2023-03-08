@@ -8,10 +8,10 @@ The name **WALD**-stack stems from the four technologies it is composed of, i.e.
 like [Snowflake] or [Google BigQuery], the open-source data integration engine [**A**irbyte], the open-source full-stack
 BI platform [**L**ightdash], and the open-source data transformation tool [**D**BT].
 
-This demonstration projects showcases the Wald-stack in a minimal example. It makes use of the [TPC-H dataset] by the
-[Transaction Processing Performance Council (TPC)] and the data warehouse [Snowflake]. To allow the definition of
+This demonstration projects showcases the Wald-stack in a minimal example. It makes use of the
+[Kaggle Formula 1 World Championship dataset] and the data warehouse [Snowflake]. To allow the definition of
 [Python]-based models within [dbt Core] also Snowflake's [Snowpark]-feature is enabled. For analytics and BI
-we use the graphical BI-tool [Lightdash], which is a suistable addition from the dbt-ecosystem.
+we use the graphical BI-tool [Lightdash], which is a suitable addition from the dbt-ecosystem.
 
 The WALD-stack is sustainable since it consists mainly of open-source technologies, however all technologies are also
 offered as managed cloud services. The data warehouse itself, i.e. [Snowflake] or [Google BigQuery], is the only non-open-source
@@ -194,11 +194,17 @@ passed.
 ## Formula 1 World Championship Data
 
 The following figure shows database entities, relationships, and characteristics
-of the [Kaggle Formula 1 World Championship] data, which we are using for this demonstration.
+of the [Kaggle Formula 1 World Championship dataset], which we are using for this demonstration.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/db-schema.png" alt="Formula 1 database schemas" width="500" role="img">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/db-schema.png" alt="Formula 1 database schemas" width="700" role="img">
 </div>
+
+## Credits
+
+The dbt, Snowpark part of this demonstration is heavily based on the [python-snowpark-formula1 repository] as well as
+the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs] held on January 25th, 2023.
+
 
 ## References & Resources
 
@@ -209,7 +215,6 @@ Following resources were used for this demonstration project besides the ones al
 * [Overview Quickstart ML with Snowpark for Python] by Snowflake
 * [Advanced Quickstart ML with Snowpark for Python] by Snowflake
 * [Quickstart Data Engineering with Snowpark for Python and dbt] by Snowflake
-* [Sample queries from tpch-dbgen] by Dragan Sahpaski
 * [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python] by Ripu Jain and Anders Swanson
 * [dbt cheetsheet] by Bruno S. de Lima
 
@@ -221,8 +226,6 @@ Following resources were used for this demonstration project besides the ones al
 
 [**A**irbyte]:https://airbyte.com/
 [Google BigQuery]: https://cloud.google.com/bigquery
-[TPC-H dataset]: https://www.tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.1.pdf
-[Transaction Processing Performance Council (TPC)]: https://www.tpc.org/
 [Snowflake]: https://www.snowflake.com/
 [Snowpark]: https://www.snowflake.com/snowpark/
 [**L**ightdash]: https://www.lightdash.com/
@@ -238,9 +241,7 @@ Following resources were used for this demonstration project besides the ones al
 [Snowflake's TPC-H sample database]: https://docs.snowflake.com/en/user-guide/sample-data-tpch.html
 [log into Snowflake's Snowsight UI]: https://app.snowflake.com/
 [activate Snowpark and third-party packages]: https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-packages.html
-[TPC-H Benchmark documentation]: https://www.tpc.org/tpc_documents_current_versions/pdf/tpc-h_v2.17.1.pdf
 [A Beginner’s Guide to DBT (data build tool)]: https://pttljessy.medium.com/a-beginners-guide-to-dbt-data-build-tool-part-4-dbt-automation-test-and-templating-3656114a4d8d
-[Sample queries from tpch-dbgen]: https://github.com/dragansah/tpch-dbgen/tree/master/queries
 [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python]: https://www.snowflake.com/blog/modern-analytics-stack-snowpark-dbt-python/
 [docker]: https://www.docker.com/
 [local deployment instructions]: https://docs.lightdash.com/get-started/setup-lightdash/install-lightdash/#deploy-locally-with-our-installation-script
@@ -254,4 +255,7 @@ Following resources were used for this demonstration project besides the ones al
 [Overview Quickstart ML with Snowpark for Python]: https://quickstarts.snowflake.com/guide/getting_started_snowpark_machine_learning/
 [Advanced Quickstart ML with Snowpark for Python]: https://quickstarts.snowflake.com/guide/machine_learning_with_snowpark_python
 [Quickstart Data Engineering with Snowpark for Python and dbt]: https://quickstarts.snowflake.com/guide/data_engineering_with_snowpark_python_and_dbt
-[Kaggle Formula 1 World Championship]: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
+[Kaggle Formula 1 World Championship dataset]: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
+[python-snowpark-formula1 repository]: https://github.com/dbt-labs/python-snowpark-formula1/
+[Hope Watson]: https://www.linkedin.com/in/hopewatson/
+[dbt labs]: https://www.getdbt.com/
