@@ -1,26 +1,26 @@
 /*
 This is our setup script to create a new database for the Formula1 data in Snowflake.
-We are copying data from a public s3 bucket into snowflake by defining our csv format and snowflake stage. 
+We are copying data from a public s3 bucket into snowflake by defining our csv format and snowflake stage.
 */
 -- create and define our formula1 database
 create or replace database formula1;
-use database formula1; 
-create or replace schema raw; 
-use schema raw; 
+use database formula1;
+create or replace schema raw;
+use schema raw;
 
--- define our file format for reading in the csvs 
+-- define our file format for reading in the csvs
 create or replace file format csvformat
 type = csv
 field_delimiter =','
-field_optionally_enclosed_by = '"', 
-skip_header=1; 
+field_optionally_enclosed_by = '"',
+skip_header=1;
 
 --
 create or replace stage formula1_stage
-file_format = csvformat 
+file_format = csvformat
 url = 's3://formula1-dbt-cloud-python-demo/formula1-kaggle-data/';
 
--- load in the 8 tables we need for our demo 
+-- load in the 8 tables we need for our demo
 -- we are first creating the table then copying our data in from s3
 -- think of this as an empty container or shell that we are then filling
 create or replace table formula1.raw.circuits (
@@ -34,8 +34,8 @@ create or replace table formula1.raw.circuits (
 	ALT NUMBER(38,0),
 	URL VARCHAR(16777216)
 );
--- copy our data from public s3 bucket into our tables 
-copy into circuits 
+-- copy our data from public s3 bucket into our tables
+copy into circuits
 from @formula1_stage/circuits.csv
 on_error='continue';
 
@@ -46,7 +46,7 @@ create or replace table formula1.raw.constructors (
 	NATIONALITY VARCHAR(16777216),
 	URL VARCHAR(16777216)
 );
-copy into constructors 
+copy into constructors
 from @formula1_stage/constructors.csv
 on_error='continue';
 
@@ -61,7 +61,7 @@ create or replace table formula1.raw.drivers (
 	NATIONALITY VARCHAR(16777216),
 	URL VARCHAR(16777216)
 );
-copy into drivers 
+copy into drivers
 from @formula1_stage/drivers.csv
 on_error='continue';
 
@@ -73,7 +73,7 @@ create or replace table formula1.raw.lap_times (
 	TIME VARCHAR(16777216),
 	MILLISECONDS NUMBER(38,0)
 );
-copy into lap_times 
+copy into lap_times
 from @formula1_stage/lap_times.csv
 on_error='continue';
 
@@ -86,7 +86,7 @@ create or replace table formula1.raw.pit_stops (
 	DURATION VARCHAR(16777216),
 	MILLISECONDS NUMBER(38,0)
 );
-copy into pit_stops 
+copy into pit_stops
 from @formula1_stage/pit_stops.csv
 on_error='continue';
 
@@ -110,7 +110,7 @@ create or replace table formula1.raw.races (
 	SPRINT_DATE VARCHAR(16777216),
 	SPRINT_TIME VARCHAR(16777216)
 );
-copy into races 
+copy into races
 from @formula1_stage/races.csv
 on_error='continue';
 
@@ -134,7 +134,7 @@ create or replace table formula1.raw.results (
 	FASTESTLAPSPEED FLOAT,
 	STATUSID NUMBER(38,0)
 );
-copy into results 
+copy into results
 from @formula1_stage/results.csv
 on_error='continue';
 
@@ -142,6 +142,6 @@ create or replace table formula1.raw.status (
 	STATUSID NUMBER(38,0),
 	STATUS VARCHAR(16777216)
 );
-copy into status 
+copy into status
 from @formula1_stage/status.csv
 on_error='continue';
