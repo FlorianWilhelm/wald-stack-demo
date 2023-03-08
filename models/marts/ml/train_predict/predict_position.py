@@ -85,6 +85,9 @@ def model(dbt, session):
         materialized="table",
         tags="predict",
     )
+    # reference training to make sure it ran at least once
+    dbt.ref("train_test_position")
+
     session._use_scoped_temp_objects = False
     download_models_and_libs_from_stage(session)
     predictor = load_model(session)
