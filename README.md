@@ -105,7 +105,24 @@ and open-source alternative to [Anaconda].
 
 ## Demonstration of the WALD-stack
 
-### Demonstration use-case
+To demonstrate the power of the WALD stack we will:
+
+1. ingest a Formula 1 dataset into [Snowflake] using Snowflake's internal capabilities,
+2. use [Airbyte] to exemplify how external data sources, in our case a csv file with weather information, can be ingested into Snowflake,
+3. use [dbt] to transform the raw data using SQL and Python leveraging [Snowpark] for data analysis as well as train & predict the position in a race using some simple [Scikit-Learn] model,
+4. use [Lightdash] to visualise the results and demonstrate its ad-hoc analysis capabilities.
+
+### Ingesting the Formula 1 Dataset
+
+To have same data to play around we are going to use the [Kaggle Formula 1 World Championship dataset], which is luckily
+available on some S3 bucket. To ingest the data into Snowflake, just execute the script [ingest_formula1_from_s3_to_snowflake.sql]
+within a notebook of the Snowsight UI. Just select all rows and hit the run button.
+
+The following figure shows database entities, relationships, and characteristics of the data:
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/db-schema.png" alt="Formula 1 database schemas" width="800" role="img">
+</div>
 
 ### Ingesting the weather data with Airbyte
 
@@ -164,11 +181,52 @@ After about 15 minutes the sync should be successfully completed.
 </div>
 
 Airbyte has a lot more to offer since it has hundreds of sources and destinations for syncing. For our demonstration, however, that is all we need.
+Note that Airbyte integrates nicely with [dbt] and you can even specify your dbt transformations in Airbyte directly. There is much more to discover here :-)
 It should also be noted that uploading a simple csv file into Snowflake could also have been done using [dbt's seed] command.
+
+### **D**BT
+
+Since everything is already set up for you in this repository, all you need to do is run dbt with `dbt run` and you should
+see an output like this:
+```commandline
+16:30:55  Running with dbt=1.3.1
+16:30:55  Found 22 models, 17 tests, 0 snapshots, 0 analyses, 501 macros, 0 operations, 3 seed files, 9 sources, 0 exposures, 0 metrics
+16:30:55
+16:30:57  Concurrency: 1 threads (target='dev')
+16:30:57
+16:30:57  1 of 22 START sql view model WALD_STACK_DEMO.stg_f1_circuits ................... [RUN]
+16:30:58  1 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_circuits .............. [SUCCESS 1 in 0.75s]
+16:30:58  2 of 22 START sql view model WALD_STACK_DEMO.stg_f1_constructors ............... [RUN]
+16:30:59  2 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_constructors .......... [SUCCESS 1 in 1.06s]
+16:30:59  3 of 22 START sql view model WALD_STACK_DEMO.stg_f1_drivers .................... [RUN]
+16:31:00  3 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_drivers ............... [SUCCESS 1 in 0.75s]
+16:31:00  4 of 22 START sql view model WALD_STACK_DEMO.stg_f1_lap_times .................. [RUN]
+16:31:00  4 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_lap_times ............. [SUCCESS 1 in 0.73s]
+16:31:00  5 of 22 START sql view model WALD_STACK_DEMO.stg_f1_pit_stops .................. [RUN]
+16:31:01  5 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_pit_stops ............. [SUCCESS 1 in 0.72s]
+16:31:01  6 of 22 START sql view model WALD_STACK_DEMO.stg_f1_races ...................... [RUN]
+16:31:02  6 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_races ................. [SUCCESS 1 in 0.77s]
+16:31:02  7 of 22 START sql view model WALD_STACK_DEMO.stg_f1_results .................... [RUN]
+16:31:03  7 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_results ............... [SUCCESS 1 in 0.70s]
+16:31:03  8 of 22 START sql view model WALD_STACK_DEMO.stg_f1_status ..................... [RUN]
+16:31:03  8 of 22 OK created sql view model WALD_STACK_DEMO.stg_f1_status ................ [SUCCESS 1 in 0.67s]
+...
+```
+Using the Snowsight UI you can now explore the created tables in the database `MY_DB`. From an analyst's perspective,
+the tables created from [models/marts/aggregates] are interesting as here Python is used to retrieve summary statistics
+about pit stops by constructor in table `FASTEST_PIT_STOPS_BY_CONSTRUCTOR` and the 5-year rolling average of pit stop times
+alongside the average for each year is shown in table `LAP_TIMES_MOVING_AVG`.
+
+From a data scientist's perspective, it's really nice to see how easy it is to use Python ecosystem to a train model,
+store it away using a Snowflake stage and loading it again for prediction. Check out the files under [models/marts/ml]
+to see how easy that is with [Snowpark] and also take a look at the resulting tables `TRAIN_TEST_POSITION` and `PREDICT_POSITION`.
+
+Besides transformations, [dbt] has much more to offer like unit tests. Run some unit test examples with `dbt test` and
+check out the [References & Resources](#references--resources) for more information on learning dbt.
 
 ### **L**ightdash
 
-### **D**BT
+
 
 
 
@@ -198,16 +256,6 @@ passed.
 * **bring down and clean volumes**: `docker-compose -f docker-compose.yml down -v`
 
 
-## Formula 1 World Championship Data
-
-The following figure shows database entities, relationships, and characteristics
-of the [Kaggle Formula 1 World Championship dataset], which we are using for this demonstration.
-
-<div align="center">
-<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/db-schema.png" alt="Formula 1 database schemas" width="800" role="img">
-</div>
-
-
 ## Credits
 
 The dbt, Snowpark part of this demonstration is heavily based on the [python-snowpark-formula1 repository] as well as
@@ -215,6 +263,7 @@ the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs
 
 
 ## References & Resources
+<a name="references--resources"></a>
 
 Following resources were used for this demonstration project besides the ones already mentioned:
 
@@ -267,6 +316,7 @@ Following resources were used for this demonstration project besides the ones al
 [python-snowpark-formula1 repository]: https://github.com/dbt-labs/python-snowpark-formula1/
 [Hope Watson]: https://www.linkedin.com/in/hopewatson/
 [dbt labs]: https://www.getdbt.com/
-
-
-{"sep":";", "header": 0, "names": ["ghcn_din", "date", "prcp", "snow", "tmax", "tmin", "elevation", "name", "coord", "country_code"]}
+[ingest_formula1_from_s3_to_snowflake.sql]: ./setup_scripts/ingest_formula1_from_s3_to_snowflake.sql
+[Scikit-Learn]: https://scikit-learn.org/
+[models/marts/aggregates]: ./models/marts/aggregates/
+[models/marts/ml]: ./models/marts/ml/
