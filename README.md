@@ -341,6 +341,7 @@ https://docs.dagster.io/integrations/dbt
 
 - [ ] Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
   the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
+- [ ] Clean up the Python code especially in the ml part.
 
 [**A**irbyte]:https://airbyte.com/
 [Airbyte]:https://airbyte.com/
