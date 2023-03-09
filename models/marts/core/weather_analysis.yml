@@ -1,10 +1,4 @@
 version: 2
-sources:
-  - name: weather
-    database: weather
-    schema: raw
-    tables:
-      - name: cameri
 models:
   - name: weather_analysis
     description: >-
@@ -187,6 +181,11 @@ models:
           dimension:
             type: string
       - name: dnf_flag
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: tavg
         description: ""
         meta:
           dimension:

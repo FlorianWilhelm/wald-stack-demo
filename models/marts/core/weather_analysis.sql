@@ -5,7 +5,7 @@ with results as (
 ),
 
 weather as (
-    select * from {{ source('weather', 'cameri') }}
+    select * from {{ ref('stg_weather') }}
 ),
 
 races as (
@@ -61,6 +61,7 @@ int_results as (
       case when weather.prcp is null then 0 else 1 end as rained,
       weather.tmin,
       weather.tmax,
+      weather.tavg,
       grid,
       position,
       position_text,

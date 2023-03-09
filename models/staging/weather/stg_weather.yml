@@ -1,0 +1,85 @@
+version: 2
+sources:
+  - name: weather
+    database: weather
+    schema: raw
+    tables:
+      - name: cameri
+models:
+  - name: stg_weather
+    columns:
+      - name: date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: prcp
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: snow
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: tmax
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: tmin
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: coord
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: ghcn_din
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: elevation
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: country_code
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: _airbyte_ab_id
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: _airbyte_emitted_at
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: _airbyte_normalized_at
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: _airbyte_cameri_hashid
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: tavg
+        description: ""
+        meta:
+          dimension:
+            type: number
