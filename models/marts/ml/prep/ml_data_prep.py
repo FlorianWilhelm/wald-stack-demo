@@ -40,16 +40,16 @@ def model(dbt, session):
     dnf_by_constructor = data.groupby("CONSTRUCTOR_NAME").sum()["DNF_FLAG"]
     constructor_race_entered = data.groupby("CONSTRUCTOR_NAME").count()["DNF_FLAG"]
     constructor_dnf_ratio = dnf_by_constructor / constructor_race_entered
-    constructor_relaiblity = 1 - constructor_dnf_ratio
-    constructor_relaiblity_dict = dict(
-        zip(constructor_relaiblity.index, constructor_relaiblity)
+    constructor_reliability = 1 - constructor_dnf_ratio
+    constructor_reliability_dict = dict(
+        zip(constructor_reliability.index, constructor_reliability)
     )
 
     data["DRIVER_CONFIDENCE"] = data["DRIVER"].apply(
         lambda x: driver_confidence_dict[x]
     )
-    data["CONSTRUCTOR_RELAIBLITY"] = data["CONSTRUCTOR_NAME"].apply(
-        lambda x: constructor_relaiblity_dict[x]
+    data["CONSTRUCTOR_RELIABILITY"] = data["CONSTRUCTOR_NAME"].apply(
+        lambda x: constructor_reliability_dict[x]
     )
 
     # removing retired drivers and constructors

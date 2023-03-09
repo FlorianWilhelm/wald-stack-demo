@@ -19,7 +19,7 @@ def model(dbt, session):
             "DRIVER",
             "DRIVERS_AGE_YEARS",
             "DRIVER_CONFIDENCE",
-            "CONSTRUCTOR_RELAIBLITY",
+            "CONSTRUCTOR_RELIABILITY",
             "TOTAL_PIT_STOPS_PER_RACE",
             "ACTIVE_DRIVER",
             "ACTIVE_CONSTRUCTOR",
