@@ -178,7 +178,7 @@ After hitting <kbd>Set up connection</kbd>, you should see that Airbyte starts s
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-sync.png" alt="Airbyte syncs the weather data" width="500" role="img">
 </div>
 
-After about 15 minutes the sync should be successfully completed.
+After roughly a minute, the sync should be successfully completed.
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-sync-succeeded.png" alt="Airbyte sync succeeded" width="500" role="img">
 </div>
@@ -224,12 +224,21 @@ From a data scientist's perspective, it's really nice to see how easy it is to u
 store it away using a Snowflake stage and loading it again for prediction. Check out the files under [models/marts/ml]
 to see how easy that is with [Snowpark] and also take a look at the resulting tables `TRAIN_TEST_POSITION` and `PREDICT_POSITION`.
 
-Besides transformations, [dbt] has much more to offer like unit tests. Run some unit test examples with `dbt test` and
-check out the [References & Resources](#references--resources) for more information on learning dbt.
+Besides transformations, [dbt] has much more to offer like unit tests. Run some predefined unit test examples with `dbt test`.
+Another outstanding feature of dbt is how easy it is to create useful documentation for your users and yourself. To test
+it just run `dbt docs generate` followed by `dbt docs serve --port 8081` (on the default port 8080 Lightdash is running)
+and open [http://localhost:8081](http://localhost:8081). In this web ui you can explore your tables, columns, metrics, etc.
+and even get a useful lineage graph of your data:
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/dbt-lineage-graph.png" alt="dbt lineage graph" width="800" role="img">
+</div>
+
+Finally, don't forget to check out the [References & Resources](#references--resources) for more information on learning dbt.
 
 ### **L**ightdash
 
-
+* always use `lightdash before`
 
 
 
@@ -286,6 +295,7 @@ the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs
 - [ ] Mention also Dagster as a complementary tool
 
 [**A**irbyte]:https://airbyte.com/
+[Airbyte]:https://airbyte.com/
 [Google BigQuery]: https://cloud.google.com/bigquery
 [Snowflake]: https://www.snowflake.com/
 [Snowpark]: https://www.snowflake.com/snowpark/
