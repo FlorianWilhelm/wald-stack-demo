@@ -1,0 +1,55 @@
+version: 2
+models:
+  - name: fastest_pit_stops_by_constructor
+    description: >-
+      Use the python .describe() method to retrieve summary statistics table
+      about pit stops by constructor. Sort by average stop time ascending so the
+      first row returns the fastest constructor.
+    columns:
+      - name: constructor_name
+        description: team that makes the car
+        tests:
+          - unique
+        meta:
+          dimension:
+            type: string
+      - name: count
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: mean
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: std
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: min
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: 25%
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: 50%
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: 75%
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: max
+        description: ""
+        meta:
+          dimension:
+            type: number

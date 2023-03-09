@@ -1,0 +1,26 @@
+version: 2
+models:
+  - name: lap_times_moving_avg
+    description: >-
+      Use the python .rolling() method to calculate the 5 year rolling average
+      of pit stop times alongside the average for each year.
+    columns:
+      - name: race_year
+        description: year of the race
+        tests:
+          - relationships:
+              to: ref('int_lap_times_years')
+              field: race_year
+        meta:
+          dimension:
+            type: number
+      - name: lap_time_seconds
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: lap_moving_avg_5_years
+        description: ""
+        meta:
+          dimension:
+            type: number

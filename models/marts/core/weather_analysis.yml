@@ -1,7 +1,15 @@
 version: 2
+sources:
+  - name: weather
+    database: weather
+    schema: raw
+    tables:
+      - name: cameri
 models:
-  - name: int_results
-    description: "{{ doc(\"int_results\") }}"
+  - name: weather_analysis
+    description: >-
+      Analysis of the weather effects on the race results of the Monza Grand
+      Prix
     columns:
       - name: result_id
         description: ""
@@ -88,6 +96,26 @@ models:
         meta:
           dimension:
             type: string
+      - name: prcp
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: rained
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: tmin
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: tmax
+        description: ""
+        meta:
+          dimension:
+            type: number
       - name: grid
         description: ""
         meta:
@@ -159,77 +187,6 @@ models:
           dimension:
             type: string
       - name: dnf_flag
-        description: ""
-        meta:
-          dimension:
-            type: number
-  - name: int_pit_stops
-    description: "{{ doc(\"int_pit_stops\") }}"
-    columns:
-      - name: race_id
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: driver_id
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: stop_number
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: lap
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: lap_time_formatted
-        description: ""
-        meta:
-          dimension:
-            type: string
-      - name: pit_stop_duration_seconds
-        description: ""
-        meta:
-          dimension:
-            type: string
-      - name: pit_stop_milliseconds
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: total_pit_stops_per_race
-        description: ""
-        meta:
-          dimension:
-            type: number
-  - name: int_lap_times_years
-    description: "{{ doc(\"int_lap_times_years\") }}"
-    columns:
-      - name: race_id
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: driver_id
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: race_year
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: lap
-        description: ""
-        meta:
-          dimension:
-            type: number
-      - name: lap_time_milliseconds
         description: ""
         meta:
           dimension:

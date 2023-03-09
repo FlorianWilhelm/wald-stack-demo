@@ -1,0 +1,30 @@
+version: 2
+models:
+  - name: int_lap_times_years
+    description: "{{ doc(\"int_lap_times_years\") }}"
+    columns:
+      - name: race_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: driver_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: race_year
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: lap
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: lap_time_milliseconds
+        description: ""
+        meta:
+          dimension:
+            type: number
