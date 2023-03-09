@@ -106,6 +106,11 @@ and open-source alternative to [Anaconda].
    5. authenticate the CLI and connect the `wald_stack` dbt project by running `lightdash login http://localhost:8080`.
 
 
+> **Note**
+> If you have improvements for this example, please consider contributing back by creating a pull request. To have it
+> all nice and tidy, please make sure to install & setup [pre-commit], i.e. `pip install precommit` and `pre-commit install`,
+> so that all your commits conform automatically to the style guides used in this project.
+
 ## Demonstration of the WALD-stack
 
 To demonstrate the power of the WALD stack we will:
@@ -238,9 +243,53 @@ Finally, don't forget to check out the [References & Resources](#references--res
 
 ### **L**ightdash
 
-* always use `lightdash before`
+The Lightdash Web UI let's you basically do two basis things, i.e. running *ad-hoc queries* or construct queries with the intent
+to save their results as *charts*. Different charts can then be placed within *dashboards*. Charts and dashboards can be
+organized within *spaces*. Here is a basic view of Lightdash:
 
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/lightdash-overview.png" alt="Main view of Lightdash and a click on the new-button" width="800" role="img">
+</div>
 
+For demonstration purposes, let's run an ad-hoc query to take a look at the [weather-analsysis] table. For that, just hit
+<kbd>+ New</kbd> and select <kbd>Query using SQL runner</kbd>. All we need to do is to select the table `weather_analsysis` from
+the left menu, adjust the query and hit the <kbd>▶ Run query</kbd> button. That should look like this:
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/lightdash-adhoc-query.png" alt="Results of an ad-hoc query" width="800" role="img">
+</div>
+
+Now let's try to construct a chart by clicking on <kbd>+ New</kbd> and select <kbd>Query from tables</kbd>. We select from
+the left menu the table `Int lap times years` and choose the *metric* `Lap times in seconds` followed by the *dimensions* `Race name`
+and `Driver year` and filter for the race names italian and british grand prix. We then hit <kbd>Configure</kbd> and group
+by `Race name` and also set a horizontal bar char. The result looks like this:
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/lightdash-chart-grandprix.png" alt="Horizontal bar chart of lap times over years for two grand pix" width="800" role="img">
+</div>
+
+If you wonder about the concept of metrics and dimensions that dbt and lightdash are using you can find a [good introduction here](https://docs.lightdash.com/get-started/setup-lightdash/intro-metrics-dimensions).
+
+We can now hit the <kbd>Save chart</kbd>-button and save it into one of our spaces. If you haven't yet one, you can create one at that point.
+In appearing chart, view click on <kbd>...</kbd> and select <kbd>Add chart to dashboard</kbd>. Select a dashboard or create a new one.
+Now use <kbd>Browse</kbd> » <kbd>All dashboards</kbd> to find your newly created dashboard. This shows a similar dashboard with two charts
+and a small explanation box.
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/lightdash-dashboard.png" alt="Dashboard with two charts in Lightdash" width="800" role="img">
+</div>
+
+The workflow with Lightdash is that you mostly work with whatever IDE you like to create tables, metrics, dimensions within your dbt project.
+After you are happy with your changes just prepend `lightdash` before your `dbt` commands like `run`, `build`, `compile`. For instance, if you altered
+the table [int_lab_times_years.sql], just run `lightdash dbt run -s int_lap_times_years` to update everything. In Lightdash you then hit
+ <kbd>↻ Refresh dbt</kbd> to load the changes.
+
+### Conclusion
+
+We have seen the only surface of what's possible with the WALD stack using a simple example, but we did it end to end.
+There is much more to discover and the dbt ecosystem is growing constantly. Many established tools also start to integrate
+with it. For instance the data pipeline integration tool [dagster] also plays nicely with dbt as shown in the [dagster dbt integration] docs.
+If you need with help with your WALD-stack or have general questions don't hesitate to consult us at [inovex].
 
 ## What else is to see here?
 
@@ -286,13 +335,12 @@ Following resources were used for this demonstration project besides the ones al
 
 The dbt, Snowpark part of this demonstration is heavily based on the [python-snowpark-formula1 repository] as well as
 the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs] held on January 25th, 2023.
-
+https://docs.dagster.io/integrations/dbt
 
 ## ToDos
 
 - [ ] Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
   the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
-- [ ] Mention also Dagster as a complementary tool
 
 [**A**irbyte]:https://airbyte.com/
 [Airbyte]:https://airbyte.com/
@@ -335,3 +383,9 @@ the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs
 [models/marts/aggregates]: ./models/marts/aggregates/
 [models/marts/ml]: ./models/marts/ml/
 [how-to-install-the-lightdash-cli]: https://docs.lightdash.com/guides/cli/how-to-install-the-lightdash-cli
+[int_lab_times_years.sql]: ./models/intermediate/int_lap_times_years.sql
+[pre-commit]: https://pre-commit.com/
+[weather-analsysis]: ./models/marts/core/weather_analysis.sql
+[dagster]: https://dagster.io/
+[dagster dbt integration]: https://docs.dagster.io/integrations/dbt
+[inovex]: https://www.inovex.de/en/
