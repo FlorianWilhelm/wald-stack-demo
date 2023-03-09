@@ -202,17 +202,17 @@ models:
         meta:
           dimension:
             type: number
-      - name: constructor_relaiblity
-        description: ""
-        meta:
-          dimension:
-            type: number
       - name: active_driver
         description: ""
         meta:
           dimension:
             type: number
       - name: active_constructor
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: constructor_reliability
         description: ""
         meta:
           dimension:

@@ -37,11 +37,6 @@ models:
         meta:
           dimension:
             type: number
-      - name: constructor_relaiblity
-        description: ""
-        meta:
-          dimension:
-            type: number
       - name: total_pit_stops_per_race
         description: ""
         meta:
@@ -57,3 +52,8 @@ models:
         meta:
           dimension:
             type: string
+      - name: constructor_reliability
+        description: ""
+        meta:
+          dimension:
+            type: number
