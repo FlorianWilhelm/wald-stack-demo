@@ -243,7 +243,7 @@ Finally, don't forget to check out the [References & Resources](#references--res
 
 ### **L**ightdash
 
-The Lightdash Web UI let's you basically do two basis things, i.e. running *ad-hoc queries* or construct queries with the intent
+The Lightdash Web UI let's you do two basic things, i.e. running *ad-hoc queries* or construct queries with the intent
 to save their results as *charts*. Different charts can then be placed within *dashboards*. Charts and dashboards can be
 organized within *spaces*. Here is a basic view of Lightdash:
 
@@ -335,7 +335,6 @@ Following resources were used for this demonstration project besides the ones al
 
 The dbt, Snowpark part of this demonstration is heavily based on the [python-snowpark-formula1 repository] as well as
 the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs] held on January 25th, 2023.
-https://docs.dagster.io/integrations/dbt
 
 ## ToDos
 
