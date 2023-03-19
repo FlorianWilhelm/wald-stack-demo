@@ -8,7 +8,7 @@ The name **WALD**-stack stems from the four technologies it is composed of, i.e.
 like [Snowflake] or [Google BigQuery], the open-source data integration engine [**A**irbyte], the open-source full-stack
 BI platform [**L**ightdash], and the open-source data transformation tool [**D**BT].
 
-This demonstration projects showcases the Wald-stack in a minimal example. It makes use of the
+This demonstration projects showcases the WALD-stack in a minimal example. It makes use of the
 [Kaggle Formula 1 World Championship dataset] and the data warehouse [Snowflake]. To allow the definition of
 [Python]-based models within [dbt Core] also Snowflake's [Snowpark]-feature is enabled. For analytics and BI
 we use the graphical BI-tool [Lightdash], which is a suitable addition from the dbt-ecosystem.
