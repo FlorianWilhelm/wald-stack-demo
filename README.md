@@ -194,8 +194,8 @@ It should also be noted that uploading a simple csv file into Snowflake could al
 
 ### **D**BT
 
-Since everything is already set up for you in this repository, all you need to do is run dbt with `dbt run` and you should
-see an output like this:
+Since everything is already set up for you in this repository, just don't forget to activate the mamba environment with `mamba activate wald-stack` before
+you run dbt with `dbt run`. You should see an output like this:
 ```commandline
 16:30:55  Running with dbt=1.3.1
 16:30:55  Found 22 models, 17 tests, 0 snapshots, 0 analyses, 501 macros, 0 operations, 3 seed files, 9 sources, 0 exposures, 0 metrics
