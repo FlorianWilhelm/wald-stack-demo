@@ -54,10 +54,9 @@ and open-source alternative to [Anaconda].
    1. clone this repository with `git clone https://github.com/FlorianWilhelm/wald-stack-demo.git`,
    2. change into the repository with `cd wald-stack-demo`,
    3. make sure you have [Mambaforge] installed,
-   4. set up the mamba environment `wald-stack` with:
+   4. set up the mamba/conda environment `wald-stack` with:
       ```
-      mamba create --name wald-stack -c https://repo.anaconda.com/pkgs/snowflake \
-      python=3.8 numpy pandas jupyterlab dbt-core dbt-snowflake snowflake-snowpark-python snowflake-connector-python
+      mamba env create -f environment.yml
       ```
       If this command fails by not resolving all packages use channel `conda-forge` instead.
    5. activate the environment with `mamba activate wald-stack`,
@@ -342,8 +341,6 @@ the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs
 
 ## ToDos
 
-- [ ] Find out why creating an environment file with `mamba env export --no-builds > environment.yml` and recreating
-  the environment with `mamba env create -f environment.yml` fails with a lot of packages that cannot be resolved.
 - [ ] Clean up the Python code especially in the ml part.
 
 [**A**irbyte]:https://airbyte.com/
