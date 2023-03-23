@@ -58,7 +58,6 @@ and open-source alternative to [Anaconda].
       ```
       mamba env create -f environment.yml
       ```
-      If this command fails by not resolving all packages use channel `conda-forge` instead.
    5. activate the environment with `mamba activate wald-stack`,
    6. create a directory `~/.dbt/` and a file `profiles.yml` in it, with content:
       ```yaml
@@ -153,7 +152,7 @@ USE DATABASE WEATHER;
 CREATE SCHEMA RAW;
 ```
 
-Let's fire up the Airbyte Web-GUI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
+Let's fire up the Airbyte Web-UI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-welcome.png" alt="Welcome screen of Airbyte" width="500" role="img">
 </div>
@@ -228,7 +227,7 @@ the tables created from [models/marts/aggregates] are interesting as here Python
 about pit stops by constructor in table `FASTEST_PIT_STOPS_BY_CONSTRUCTOR` and the 5-year rolling average of pit stop times
 alongside the average for each year is shown in table `LAP_TIMES_MOVING_AVG`.
 
-From a data scientist's perspective, it's really nice to see how easy it is to use Python ecosystem to a train model,
+From a data scientist's perspective, it's really nice to see how easy it is to use [Scikit-Learn] to train an ML-model,
 store it away using a Snowflake stage and loading it again for prediction. Check out the files under [models/marts/ml]
 to see how easy that is with [Snowpark] and also take a look at the resulting tables `TRAIN_TEST_POSITION` and `PREDICT_POSITION`.
 
