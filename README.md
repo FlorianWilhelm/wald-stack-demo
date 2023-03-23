@@ -59,6 +59,7 @@ and open-source alternative to [Anaconda].
       mamba create --name wald-stack -c https://repo.anaconda.com/pkgs/snowflake \
       python=3.8 numpy pandas jupyterlab dbt-core dbt-snowflake snowflake-snowpark-python snowflake-connector-python
       ```
+      If this command fails by not resolving all packages use channel `conda-forge` instead.
    5. activate the environment with `mamba activate wald-stack`,
    6. create a directory `~/.dbt/` and a file `profiles.yml` in it, with content:
       ```yaml
@@ -78,7 +79,7 @@ and open-source alternative to [Anaconda].
       ```
       and set `account`, `password` as well as `user` accordingly. Also check that the value of `warehouse` corresponds
       to the one you have in Snowflake,
-   7. test that your connection works by running `dbt debug`. You should see "All checks passed!"-message.
+   7. test that your connection works by running `dbt debug` in the directory of this repo. You should see "All checks passed!"-message.
 
 3. Setting up [**A**irbyte] locally, i.e.:
    1. make sure you have [docker] installed,
@@ -105,10 +106,13 @@ and open-source alternative to [Anaconda].
    4. install the `lightdash` CLI command following the [how-to-install-the-lightdash-cli] docs.
    5. authenticate the CLI and connect the `wald_stack` dbt project by running `lightdash login http://localhost:8080`.
 
+> **Note**
+> If you use [Colima](https://github.com/abiosoft/colima) as a Docker alternative, the install script will fail, caused by the function supposed to start Docker Desktop. A Simple fix is to comment out the line calling the `start_docker` function (line 417). Be sure that your Docker deamon is already running.
+> Additionally IPv6 is not properly implemented, which results in not being able to authenticate lightdash CLI using `localhost` as host. Use `lightdash login http://127.0.0.1:8080` instead to force IPv4.
 
 > **Note**
 > If you have improvements for this example, please consider contributing back by creating a pull request. To have it
-> all nice and tidy, please make sure to install & setup [pre-commit], i.e. `pip install precommit` and `pre-commit install`,
+> all nice and tidy, please make sure to install & setup [pre-commit], i.e. `pip install pre-commit` and `pre-commit install`,
 > so that all your commits conform automatically to the style guides used in this project.
 
 ## Demonstration of the WALD-stack
@@ -195,7 +199,7 @@ It should also be noted that uploading a simple csv file into Snowflake could al
 ### **D**BT
 
 Since everything is already set up for you in this repository, just don't forget to activate the mamba environment with `mamba activate wald-stack` before
-you run dbt with `dbt run`. You should see an output like this:
+you run dbt with `dbt run` in the directory of this repo. You should see an output like this:
 ```commandline
 16:30:55  Running with dbt=1.3.1
 16:30:55  Found 22 models, 17 tests, 0 snapshots, 0 analyses, 501 macros, 0 operations, 3 seed files, 9 sources, 0 exposures, 0 metrics
