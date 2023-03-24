@@ -52,8 +52,9 @@ def model(dbt, session):
     train = [X_train, y_train]
     test = [X_test, y_test]
 
-    # Use all cores (processes instead of threading) of our warehouse node
-    with joblib.parallel_backend("loky", n_jobs=-1):
+    # Set `n_jobs=-1` for maximum cores on larger warehouses, be aware of memory limitations!
+    # Using this joblib context manager, one can easily scale the training of ML models.
+    with joblib.parallel_backend("loky", n_jobs=1):
         # Now we are only training our one model to deploy.
         # We focus on the workflows and not algorithms for this demonstration!
         model = LogisticRegression()
