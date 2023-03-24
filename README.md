@@ -152,7 +152,7 @@ USE DATABASE WEATHER;
 CREATE SCHEMA RAW;
 ```
 
-Let's fire up the Airbyte Web-UI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
+Let's fire up the Airbyte web UI under [http://localhost:8000](http://localhost:8000) where you should see this after having logged in:
 <div align="center">
 <img src="https://raw.githubusercontent.com/FlorianWilhelm/wald-stack-demo/main/assets/images/airbyte-welcome.png" alt="Welcome screen of Airbyte" width="500" role="img">
 </div>
@@ -234,7 +234,7 @@ to see how easy that is with [Snowpark] and also take a look at the resulting ta
 Besides transformations, [dbt] has much more to offer like unit tests. Run some predefined unit test examples with `dbt test`.
 Another outstanding feature of dbt is how easy it is to create useful documentation for your users and yourself. To test
 it just run `dbt docs generate` followed by `dbt docs serve --port 8081` (on the default port 8080 Lightdash is running)
-and open [http://localhost:8081](http://localhost:8081). In this web ui you can explore your tables, columns, metrics, etc.
+and open [http://localhost:8081](http://localhost:8081). In this web UI you can explore your tables, columns, metrics, etc.
 and even get a useful lineage graph of your data:
 
 <div align="center">
