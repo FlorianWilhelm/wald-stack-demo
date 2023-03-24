@@ -105,7 +105,7 @@ and open-source alternative to [Anaconda].
    5. authenticate the CLI and connect the `wald_stack` dbt project by running `lightdash login http://localhost:8080`.
 
 > **Note**
-> If you use [Colima] as a Docker alternative, the install script will fail, caused by the function supposed to start Docker Desktop. A Simple fix is to comment out the line calling the `start_docker` function (line 417). Be sure that your Docker daemon is already running.
+> If you use [Colima] as a Docker alternative, the installation script will fail, caused by the function supposed to start Docker Desktop. A simple fix is to comment out the line calling the `start_docker` function (line 417). Be sure that your Docker daemon is already running.
 > Additionally IPv6 is not properly implemented, which results in not being able to authenticate lightdash CLI using `localhost` as host. Use `lightdash login http://127.0.0.1:8080` instead to force IPv4.
 
 > **Note**
