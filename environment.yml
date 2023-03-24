@@ -1,7 +1,6 @@
 name: wald-stack
 channels:
   - https://repo.anaconda.com/pkgs/snowflake
-  - conda-forge
 dependencies:
   - python=3.8
   - numpy
@@ -11,6 +10,8 @@ dependencies:
   - dbt-snowflake
   - snowflake-snowpark-python
   - snowflake-connector-python
+  - openssl=1.1  # avoids '/usr/local/lib/libssl.1.1.dylib' (no such file) on MacOS
+  # Just for linting and keeping things tidy
   - pre-commit
   - black
   - flake8
