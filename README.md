@@ -85,7 +85,7 @@ and open-source alternative to [Anaconda].
       ```commandline
       git clone https://github.com/airbytehq/airbyte.git
       cd airbyte
-      docker-compose up
+      docker compose up
       ```
    3. check if the front-end comes up at [http://localhost:8000](http://localhost:8000) and log in with
       username `airbyte` and password `password`,
@@ -314,9 +314,9 @@ passed.
 
 ### Lightdash
 
-* **restart**: `docker-compose -f docker-compose.yml start`
-* **stop**: `docker-compose -f docker-compose.yml stop -v`
-* **bring down and clean volumes**: `docker-compose -f docker-compose.yml down -v`
+* **restart**: `docker compose -f docker-compose.yml start`
+* **stop**: `docker compose -f docker-compose.yml stop -v`
+* **bring down and clean volumes**: `docker compose -f docker-compose.yml down -v`
 * **lightdash CLI**: `lightdash`
 
 ## References & Resources
