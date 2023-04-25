@@ -21,6 +21,7 @@ technology in the WALD-stack. In case of Snowflake, only the clients, eg. [snowf
 To manage the Python environment and dependencies in this demonstration, we make use of [Mambaforge], which is a faster
 and open-source alternative to [Anaconda].
 
+🎬 **Check out the [slides] of the [PyConDE / PyData talk about the WALD Stack]**
 
 ## Getting started
 
@@ -390,3 +391,5 @@ the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs
 [dagster dbt integration]: https://docs.dagster.io/integrations/dbt
 [inovex]: https://www.inovex.de/en/
 [Colima]: https://github.com/abiosoft/colima
+[slides]: assets/slides/inovex-wald-stack-pycon-pydata-small.pdf
+[PyConDE / PyData talk about the WALD Stack]: https://pretalx.com/pyconde-pydata-berlin-2023/talk/TP7ABB/
