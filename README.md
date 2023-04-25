@@ -21,7 +21,7 @@ technology in the WALD-stack. In case of Snowflake, only the clients, eg. [snowf
 To manage the Python environment and dependencies in this demonstration, we make use of [Mambaforge], which is a faster
 and open-source alternative to [Anaconda].
 
-🎬 **Check out the [slides] of the [PyConDE / PyData talk about the WALD Stack]**
+🎬 **Check out the [slides] of the [PyConDE / PyData talk about the WALD Stack].**
 
 ## Getting started
 
