@@ -332,7 +332,7 @@ Following resources were used for this demonstration project besides the ones al
 * [Quickstart Data Engineering with Snowpark for Python and dbt] by Snowflake
 * [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python] by Ripu Jain and Anders Swanson
 * [dbt cheetsheet] by Bruno S. de Lima
-
+* [Generating ML-Ready Pipelines with dbt and Snowpark] video by [Hope Watson]
 
 ## Credits
 
@@ -393,3 +393,4 @@ the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs
 [Colima]: https://github.com/abiosoft/colima
 [slides]: assets/slides/inovex-wald-stack-pycon-pydata-small.pdf
 [PyConDE / PyData talk about the WALD Stack]: https://pretalx.com/pyconde-pydata-berlin-2023/talk/TP7ABB/
+[Generating ML-Ready Pipelines with dbt and Snowpark]: https://www.youtube.com/watch?v=K9nVAaLTAIM
