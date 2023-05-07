@@ -332,12 +332,12 @@ Following resources were used for this demonstration project besides the ones al
 * [Quickstart Data Engineering with Snowpark for Python and dbt] by Snowflake
 * [Upgrade to the Modern Analytics Stack: Doing More with Snowpark, dbt, and Python] by Ripu Jain and Anders Swanson
 * [dbt cheetsheet] by Bruno S. de Lima
-* [Generating ML-Ready Pipelines with dbt and Snowpark] video by [Hope Watson]
 
 ## Credits
 
 The dbt, Snowpark part of this demonstration is heavily based on the [python-snowpark-formula1 repository] as well as
-the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs] held on January 25th, 2023.
+the awesome "Advanced Analytics" online workshop by [Hope Watson] from [dbt labs] held on January 25th, 2023. Check out
+the similar tutorial [Generating ML-Ready Pipelines with dbt and Snowpark] by her.
 
 ## ToDos
 
