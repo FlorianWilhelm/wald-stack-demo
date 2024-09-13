@@ -76,8 +76,9 @@ and open-source alternative to [Anaconda].
             warehouse: COMPUTE_WH
         target: dev
       ```
-      and set `account`, `password` as well as `user` accordingly. Also check that the value of `warehouse` corresponds
-      to the one you have in Snowflake,
+      and set `account`, `password` as well as `user` accordingly. **Note** that `account` is the Snowflake Account identifier,
+      e.g. `DWABNEV.LRB61572`, but the `.` replaced by `-`, e.g. `DWABNEV-LRB61572`.
+      Also check that the value of `warehouse` corresponds to the one you have in Snowflake,
    7. test that your connection works by running `dbt debug` in the directory of this repo. You should see "All checks passed!"-message.
 
 3. Setting up [**A**irbyte] locally, i.e.:
