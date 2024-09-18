@@ -7,7 +7,7 @@ models:
     columns:
       - name: race_year
         description: year of the race
-        tests:
+        data_tests:
           - relationships:
               to: ref('int_lap_times_years')
               field: race_year

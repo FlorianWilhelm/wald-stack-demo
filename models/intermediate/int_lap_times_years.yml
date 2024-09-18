@@ -43,18 +43,3 @@ models:
         meta:
           dimension:
             type: number
-metrics:
-  - name: lap_times
-    label: Lap times in seconds
-    model: ref('int_lap_times_years')
-    description: The average duration of a pit stop in seconds
-    calculation_method: average
-    expression: lap_time_seconds
-    timestamp: race_year
-    time_grains:
-      - year
-    config:
-      enabled: true
-      treat_null_values_as_zero: false
-    meta:
-      team: Engineering

@@ -8,7 +8,7 @@ models:
     columns:
       - name: constructor_name
         description: team that makes the car
-        tests:
+        data_tests:
           - unique
         meta:
           dimension:
